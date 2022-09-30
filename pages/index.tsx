@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ genres }) => {
     <div>
       <Header></Header>
       <Navbar genres={genres}></Navbar>
-      <Navbar></Navbar>
+      <Movies movies={dummyData.results}></Movies>
     </div>
   );
 };

@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         'hulu-main': '#06202A',
       },
+      screens: {
+        '3xl': '2000px',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],
