@@ -9,6 +9,7 @@ import Movies from '../../components/Movies/Movies';
 import { TGenres, TMovie } from '../../type';
 import { addTopTrendTopRated } from '../../utilities/helpers';
 import { fetchAllGenres, fetchGenresMovies } from '../../utilities/requests';
+import Title from '../../components/Title/Title';
 type Props = {
   genres: TGenres;
   movies: TMovie[];
@@ -17,6 +18,7 @@ const genreID: NextPage<Props> = ({ genres, movies }: Props) => {
   return (
     <div>
       <Navbar genres={genres}></Navbar>
+      <Title genres={genres}></Title>
       <Movies movies={movies}></Movies>
     </div>
   );

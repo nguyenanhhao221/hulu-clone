@@ -8,9 +8,8 @@ import {
   BoltIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-type Props = {};
-const Header = (props: Props) => {
+import HuLuLogo from '../../public/Hulu-Green-digital.png';
+const Header = () => {
   return (
     <header className="flex h-auto flex-col items-center justify-between p-4 sm:flex-row">
       <div className="flex max-w-2xl flex-grow justify-evenly">
@@ -21,13 +20,14 @@ const Header = (props: Props) => {
         <HeaderItem title="COLLECTION" Icon={RectangleStackIcon}></HeaderItem>
         <HeaderItem title="USER" Icon={UserIcon}></HeaderItem>
       </div>
-      <div>
+      <div className="">
         <Image
-          src="https://links.papareact.com/ua6"
-          width={200}
-          height={200}
+          src={HuLuLogo}
+          width={150}
+          height={100}
           alt="Hulu Logo"
           objectFit="contain"
+          className="object-center"
         ></Image>
       </div>
     </header>

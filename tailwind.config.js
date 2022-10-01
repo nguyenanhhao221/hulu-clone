@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'hulu-main': '#06202A',
+        'hulu-green': '#1ce783',
       },
       screens: {
         '3xl': '2000px',
