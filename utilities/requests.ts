@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
-import { TGenres } from '../type';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { error } from 'console';
+import { TDataTopRated, TGenres } from '../type';
 
 const getUnique = (arr: (TGenres | undefined)[]) => {
   //* Merge 1 level deep of nested array
@@ -23,7 +24,12 @@ const fetchGenres = async (url: string, apiKey: string) => {
     }
     throw new Error('Network Error');
   } catch (error) {
-    throw new Error(error);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
   }
 };
 export const fetchAllGenres = async (apiKey: string) => {
@@ -36,4 +42,30 @@ export const fetchAllGenres = async (apiKey: string) => {
 
   return getUnique(result);
 };
-// export default requests;
+
+export const fetchTopRatedMovies = async (apiKey: string) => {
+  const topRatedURL = 'https://api.themoviedb.org/3/movie/top_rated';
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      language: 'en-US',
+      page: 1,
+    },
+  };
+  try {
+    const response: AxiosResponse<TDataTopRated> = await axios.get(
+      topRatedURL,
+      options
+    );
+    if (response.status === 200) {
+      return response.data.results;
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
+};

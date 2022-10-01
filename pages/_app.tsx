@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Header from '../components/Header/Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -81,6 +82,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
+      <Header></Header>
       <Component {...pageProps} />
     </>
   );

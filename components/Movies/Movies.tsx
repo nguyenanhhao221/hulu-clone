@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { TMovie } from '../../type';
 import MovieCard from './MovieCard';
 
