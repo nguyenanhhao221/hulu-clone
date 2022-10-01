@@ -1,16 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
-import type {
-  GetStaticProps,
-  NextPage,
-  InferGetStaticPropsType,
-  GetStaticPropsContext,
-} from 'next';
-import Head from 'next/head';
+import type { NextPage, GetStaticPropsContext } from 'next';
 import Header from '../components/Header/Header';
 import Movies from '../components/Movies/Movies';
 import Navbar from '../components/Navbar/Navbar';
 import type { TGenres } from '../type';
 import { dummyData } from '../utilities/dummyData';
+import { fetchAllGenres } from '../utilities/requests';
 
 //TODO Remove when make actual API call
 type Props = {
@@ -27,26 +22,16 @@ const Home: NextPage<Props> = ({ genres }) => {
 };
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const url = 'https://api.themoviedb.org/3/genre/movie/list';
-  try {
-    const response: AxiosResponse<{ genres: TGenres }> = await axios.get(url, {
-      params: {
-        api_key: process.env.API_KEY,
-        language: 'en_US',
-      },
-    });
-    if (response.status === 200) {
-      const genres = response.data.genres;
-      return {
-        props: {
-          genres,
-        },
-      };
-    }
-    throw new Error('Network Error');
-  } catch (error) {
-    console.error(error);
-  }
+  const apiKey = process.env.API_KEY;
+  if (typeof apiKey === 'undefined')
+    throw new Error('apiKey does not exist in ENV');
+
+  const response = await fetchAllGenres(apiKey);
+  return {
+    props: {
+      genres: response,
+    },
+  };
 };
 
 export default Home;

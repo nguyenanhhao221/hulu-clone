@@ -14,9 +14,7 @@ const Header = (props: Props) => {
   return (
     <header className="m-2 flex h-auto flex-col items-center justify-between sm:flex-row">
       <div className="flex max-w-2xl flex-grow justify-evenly">
-        <Link href={'/'}>
-          <HeaderItem title="HOME" Icon={HomeIcon}></HeaderItem>
-        </Link>
+        <HeaderItem title="HOME" Icon={HomeIcon}></HeaderItem>
         <HeaderItem title="TRENDING" Icon={BoltIcon}></HeaderItem>
         <HeaderItem title="VERIFIED" Icon={CheckBadgeIcon}></HeaderItem>
         <HeaderItem title="SEARCH" Icon={MagnifyingGlassIcon}></HeaderItem>

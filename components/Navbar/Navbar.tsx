@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { TGenres } from '../../type';
-import requests from '../../utilities/requests';
 
 type Props = {
   genres: TGenres;
@@ -19,11 +18,10 @@ const Navbar = ({ genres }: Props) => {
             {title}
           </li>
         ))} */}
-        <li></li>
         {genres?.map(({ name, id }) => (
           <li
             key={id}
-            className="transform cursor-pointer transition duration-100 hover:scale-125 active:text-red-500"
+            className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white active:text-red-500"
           >
             {name}
           </li>
