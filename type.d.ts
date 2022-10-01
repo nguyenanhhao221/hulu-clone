@@ -1,7 +1,7 @@
 export type TGenres = TGenre[];
 
 export interface TGenre {
-  id: number;
+  id: number | string; //string for special case only, in this case because we will use Top Trend and Top Rated
   name: string;
 }
 export type TDataTopRated = {

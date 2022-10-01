@@ -1,0 +1,96 @@
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  NextPage,
+} from 'next';
+import Navbar from '../../components/Navbar/Navbar';
+import Movies from '../../components/Movies/Movies';
+import { TDataTopRated, TGenres, TMovie } from '../../type';
+import { addTopTrendTopRated } from '../../utilities/helpers';
+import { fetchAllGenres } from '../../utilities/requests';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+type Props = {
+  genres: TGenres;
+  movies: TMovie[];
+};
+const genreID: NextPage<Props> = ({ genres, movies }: Props) => {
+  return (
+    <div>
+      <Navbar genres={genres}></Navbar>
+      <Movies movies={movies}></Movies>
+    </div>
+  );
+};
+export default genreID;
+
+const fetchGenresMovies = async (apiKey: string, genreId: number | string) => {
+  const url = 'https://api.themoviedb.org/3/discover/movie';
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      language: 'en-US',
+      sort_by: 'popularity.desc',
+      with_genres: genreId,
+    },
+  };
+  try {
+    const response: AxiosResponse<TDataTopRated> = await axios.get(
+      url,
+      options
+    );
+    return response.data.results;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
+};
+export const getStaticPaths = async () => {
+  const apiKey = process.env.API_KEY;
+  if (typeof apiKey === 'undefined')
+    throw new Error('apiKey does not exist in ENV');
+  const response = await fetchAllGenres(apiKey);
+  const paths = response.map((genre) => ({
+    params: { id: genre.id.toString() },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
+};
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
+  const apiKey = process.env.API_KEY;
+  if (typeof apiKey === 'undefined')
+    throw new Error('apiKey does not exist in ENV');
+  try {
+    const response = await fetchAllGenres(apiKey);
+    const topRated = await fetchGenresMovies(
+      apiKey,
+      context.params?.id as unknown as number
+    );
+    return {
+      props: {
+        genres: addTopTrendTopRated(
+          response,
+          { id: 'Top Rated', name: 'Top Rated' },
+          { id: 'Top Trend', name: 'Top Trend' }
+        ),
+        movies: topRated,
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
+};

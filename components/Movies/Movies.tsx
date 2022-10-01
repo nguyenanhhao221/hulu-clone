@@ -6,6 +6,7 @@ type Props = {
   movies?: TMovie[];
 };
 const Movies = ({ movies }: Props) => {
+  const router = useRouter();
   return (
     <main>
       <div className="grid flex-wrap justify-center gap-6 overflow-hidden p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:flex">

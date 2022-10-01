@@ -1,10 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
-import type { NextPage, GetStaticPropsContext } from 'next';
-import Header from '../components/Header/Header';
+import type { NextPage, GetStaticPropsContext, GetStaticProps } from 'next';
 import Movies from '../components/Movies/Movies';
 import Navbar from '../components/Navbar/Navbar';
-import type { TDataTopRated, TGenres, TMovie } from '../type';
-import { dummyData } from '../utilities/dummyData';
+import type { TGenres, TMovie } from '../type';
+import { addTopTrendTopRated } from '../utilities/helpers';
 import { fetchAllGenres, fetchTopRatedMovies } from '../utilities/requests';
 
 //TODO Remove when make actual API call
@@ -21,7 +19,9 @@ const Home: NextPage<Props> = ({ genres, movies }) => {
   );
 };
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
@@ -30,9 +30,14 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     const topRated = await fetchTopRatedMovies(apiKey);
     return {
       props: {
-        genres: response,
+        genres: addTopTrendTopRated(
+          response,
+          { id: 'Top Rated', name: 'Top Rated' },
+          { id: 'Top Trend', name: 'Top Trend' }
+        ),
         movies: topRated,
       },
+      revalidate: 60,
     };
   } catch (error) {
     if (error instanceof Error) {

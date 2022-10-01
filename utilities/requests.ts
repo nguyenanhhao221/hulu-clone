@@ -1,15 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { error } from 'console';
 import { TDataTopRated, TGenres } from '../type';
+import { getUnique } from './helpers';
 
-const getUnique = (arr: (TGenres | undefined)[]) => {
-  //* Merge 1 level deep of nested array
-  const mergeArr = arr.flat(1);
-  const arrayUniqueByKey = [
-    ...new Map(mergeArr.map((item) => [item?.id, item])).values(),
-  ];
-  return arrayUniqueByKey;
-};
 const fetchGenres = async (url: string, apiKey: string) => {
   try {
     const response: AxiosResponse<{ genres: TGenres }> = await axios.get(url, {
@@ -35,12 +27,20 @@ const fetchGenres = async (url: string, apiKey: string) => {
 export const fetchAllGenres = async (apiKey: string) => {
   const genresMoviesURL = 'https://api.themoviedb.org/3/genre/movie/list';
   const genresTvURL = 'https://api.themoviedb.org/3/genre/tv/list';
-  const result = await Promise.all([
-    fetchGenres(genresMoviesURL, apiKey),
-    fetchGenres(genresTvURL, apiKey),
-  ]);
-
-  return getUnique(result);
+  try {
+    const result = await Promise.all([
+      fetchGenres(genresMoviesURL, apiKey),
+      fetchGenres(genresTvURL, apiKey),
+    ]);
+    return getUnique(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
 };
 
 export const fetchTopRatedMovies = async (apiKey: string) => {
