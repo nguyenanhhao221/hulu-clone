@@ -12,7 +12,7 @@ const Title = ({ genres }: Props) => {
   });
 
   return (
-    <h2 className="decoration-3 p-6 text-4xl font-bold tracking-wide underline decoration-hulu-green underline-offset-8">
+    <h2 className="decoration-3 p-6 text-center text-3xl font-bold tracking-wide underline decoration-hulu-green underline-offset-8 md:text-left">
       {title.name}
     </h2>
   );
