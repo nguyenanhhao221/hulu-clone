@@ -69,3 +69,33 @@ export const fetchTopRatedMovies = async (apiKey: string) => {
     }
   }
 };
+
+//Fetch movies based on genres
+export const fetchGenresMovies = async (
+  apiKey: string,
+  genreId: number | string
+) => {
+  const url = 'https://api.themoviedb.org/3/discover/movie';
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      language: 'en-US',
+      sort_by: 'popularity.desc',
+      with_genres: genreId,
+    },
+  };
+  try {
+    const response: AxiosResponse<TDataTopRated> = await axios.get(
+      url,
+      options
+    );
+    return response.data.results;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
+};

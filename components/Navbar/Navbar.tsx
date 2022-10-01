@@ -6,7 +6,6 @@ type Props = {
   genres: TGenres;
 };
 const Navbar = ({ genres }: Props) => {
-  const router = useRouter();
   return (
     <nav className="relative">
       <ul className="flex space-x-10 overflow-x-scroll whitespace-nowrap px-4 scrollbar-hide last:pr-24 sm:space-x-20">
