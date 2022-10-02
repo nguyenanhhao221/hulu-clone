@@ -19,7 +19,7 @@ const Header = () => {
           Icon={HomeIcon}
         ></HeaderItem>
         <HeaderItem
-          url={'/genres/top-trending'}
+          url={'/genres/top-trend'}
           title="TRENDING"
           Icon={BoltIcon}
         ></HeaderItem>
