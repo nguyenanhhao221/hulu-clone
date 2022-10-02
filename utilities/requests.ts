@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { TDataTopRated, TGenres } from '../type';
-import { getUnique } from './helpers';
+import { TDataTopRated, TGenres, TMovie } from '../type';
+import { getUnique, addTopTrendTopRated } from './helpers';
 
 const fetchGenres = async (url: string, apiKey: string) => {
   try {
@@ -32,7 +32,12 @@ export const fetchAllGenres = async (apiKey: string) => {
       fetchGenres(genresMoviesURL, apiKey),
       fetchGenres(genresTvURL, apiKey),
     ]);
-    return getUnique(result);
+    const uniqueResult = getUnique(result);
+    return addTopTrendTopRated(
+      uniqueResult,
+      { id: 'top-rated', name: 'Top Rated' },
+      { id: 'top-trend', name: 'Top Trend' }
+    );
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);
@@ -69,7 +74,21 @@ export const fetchTopRatedMovies = async (apiKey: string) => {
     }
   }
 };
-
+export const fetchTopTrendingMovies = async (apiKey: string) => {
+  const topTrendingURL = 'https://api.themoviedb.org/3/trending/all/week';
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+    },
+  };
+  const response: AxiosResponse<TDataTopRated> = await axios.get(
+    topTrendingURL,
+    options
+  );
+  if (response.status === 200) {
+    return response.data.results;
+  }
+};
 //Fetch movies based on genres
 export const fetchGenresMovies = async (
   apiKey: string,

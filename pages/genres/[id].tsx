@@ -1,20 +1,26 @@
 import {
   GetStaticPaths,
   GetStaticProps,
-  GetStaticPropsContext,
+  GetStaticPropsResult,
   NextPage,
 } from 'next';
 import Navbar from '../../components/Navbar/Navbar';
 import Movies from '../../components/Movies/Movies';
-import { TGenres, TMovie } from '../../type';
-import { addTopTrendTopRated } from '../../utilities/helpers';
-import { fetchAllGenres, fetchGenresMovies } from '../../utilities/requests';
+import { TGenres, TMovie, TUserPropResult } from '../../type';
+import {
+  fetchAllGenres,
+  fetchGenresMovies,
+  fetchTopRatedMovies,
+  fetchTopTrendingMovies,
+} from '../../utilities/requests';
 import Title from '../../components/Title/Title';
+
 type Props = {
   genres: TGenres;
   movies: TMovie[];
 };
-const genreID: NextPage<Props> = ({ genres, movies }: Props) => {
+
+const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
   return (
     <div>
       <Navbar genres={genres}></Navbar>
@@ -23,41 +29,50 @@ const genreID: NextPage<Props> = ({ genres, movies }: Props) => {
     </div>
   );
 };
-export default genreID;
+export default HomePage;
 
+//Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
-  const response = await fetchAllGenres(apiKey);
-  const paths = response.map((genre) => ({
+  const allGenres = await fetchAllGenres(apiKey);
+  const paths = allGenres.map((genre) => ({
     params: { id: genre.id.toString() },
   }));
   return {
     paths,
-    fallback: false,
+    fallback: false, //*Look up in doc
   };
 };
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
-) => {
+
+//We need the props 'movies' which will depends on the external database.
+//Depends on the path we will make different call to the database to get these props. Since the path is also depends on external database, we will need getStaticPaths.
+//Revalidate options will make this page rebuild every 60 seconds.
+export const getStaticProps: GetStaticProps<
+  TUserPropResult,
+  { id: string }
+> = async ({ params }): Promise<GetStaticPropsResult<TUserPropResult>> => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
+
   try {
-    const response = await fetchAllGenres(apiKey);
-    const topRated = await fetchGenresMovies(
-      apiKey,
-      context.params?.id as unknown as number
-    );
+    const genres = await fetchAllGenres(apiKey);
+    let movies;
+    if (typeof params !== 'undefined') {
+      if (params.id === 'top-rated') {
+        movies = await fetchTopRatedMovies(apiKey);
+      } else if (params.id === 'top-trending') {
+        movies = await fetchTopTrendingMovies(apiKey);
+      } else {
+        movies = await fetchGenresMovies(apiKey, params.id);
+      }
+    }
     return {
       props: {
-        genres: addTopTrendTopRated(
-          response,
-          { id: 'Top Rated', name: 'Top Rated' },
-          { id: 'Top Trend', name: 'Top Trend' }
-        ),
-        movies: topRated,
+        genres,
+        movies,
       },
       revalidate: 60,
     };

@@ -1,5 +1,5 @@
 import { HandThumbUpIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { TMovie } from '../../type';
 
 type Props = {
@@ -11,11 +11,10 @@ const MovieCard = ({ movie }: Props) => {
   return (
     <div className=" group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  motion-safe:hover:scale-105">
       <Image
+        className="object-contain"
         width={1920}
         height={1080}
-        layout="responsive"
         alt="thumbnail"
-        objectFit="contain"
         src={
           `${BASE_URL}${movie.backdrop_path || movie.poster_path}` ||
           `${BASE_URL}${movie.poster_path}`

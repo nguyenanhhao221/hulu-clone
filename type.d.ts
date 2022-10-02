@@ -26,3 +26,8 @@ export type TMovie = {
   video?: boolean;
   vote_average?: number;
 };
+
+export type TUserPropResult = {
+  genres: TGenres;
+  movies?: TMovie[];
+};
