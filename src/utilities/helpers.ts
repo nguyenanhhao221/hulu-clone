@@ -1,4 +1,4 @@
-import type { TGenres, TGenre } from '../type';
+import type { TGenres, TGenre } from '../../type';
 
 export const getUnique = (arr: TGenres[]) => {
   //* Merge 1 level deep of nested array

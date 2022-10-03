@@ -8,7 +8,7 @@ import {
   BoltIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import HuLuLogo from '../../public/Hulu-Green-digital.png';
+import HuLuLogo from '../../../public/Hulu-Green-digital.png';
 const Header = () => {
   return (
     <header className="flex h-auto flex-col items-center justify-between p-4 sm:flex-row">

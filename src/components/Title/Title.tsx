@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import type { TGenres } from '../../type';
+import type { TGenres } from '../../../type';
 
 type Props = {
   genres: TGenres;

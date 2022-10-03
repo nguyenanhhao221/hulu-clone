@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { TDataTopRated, TGenres, TMovie } from '../type';
+import { TDataTopRated, TGenres, TMovie } from '../../type';
 import { getUnique, addTopTrendTopRated } from './helpers';
 
 const fetchGenres = async (url: string, apiKey: string) => {

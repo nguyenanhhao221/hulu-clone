@@ -4,16 +4,16 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import Navbar from '../../components/Navbar/Navbar';
-import Movies from '../../components/Movies/Movies';
+import Navbar from '../../src/components/Navbar/Navbar';
+import Movies from '../../src/components/Movies/Movies';
 import { TGenres, TMovie, TUserPropResult } from '../../type';
 import {
   fetchAllGenres,
   fetchGenresMovies,
   fetchTopRatedMovies,
   fetchTopTrendingMovies,
-} from '../../utilities/requests';
-import Title from '../../components/Title/Title';
+} from '../../src/utilities/requests';
+import Title from '../../src/components/Title/Title';
 
 type Props = {
   genres: TGenres;
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps<
         genres,
         movies,
       },
-      revalidate: 60,
+      revalidate: 15,
     };
   } catch (error) {
     if (error instanceof Error) {
