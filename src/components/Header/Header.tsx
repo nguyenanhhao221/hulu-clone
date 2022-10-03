@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/future/image';
 import HeaderItem from './HeaderItem';
 import {
   HomeIcon,
@@ -33,8 +33,8 @@ const Header = () => {
           src={HuLuLogo}
           width={150}
           height={100}
+          placeholder="blur"
           alt="Hulu Logo"
-          objectFit="contain"
           className="object-center"
         ></Image>
       </div>
