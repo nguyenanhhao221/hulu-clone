@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps<
         genres,
         movies,
       },
-      revalidate: 15,
+      revalidate: 60,
     };
   } catch (error) {
     if (error instanceof Error) {

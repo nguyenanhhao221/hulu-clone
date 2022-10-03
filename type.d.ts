@@ -31,3 +31,7 @@ export type TUserPropResult = {
   genres: TGenres;
   movies?: TMovie[];
 };
+
+export type TMoviePagePropResult = {
+  movie: TMovie;
+};
