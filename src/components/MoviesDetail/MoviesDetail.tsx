@@ -28,17 +28,9 @@ const MoviesDetail = ({ movie, imageProps }: Props) => {
               width={200}
               height={150}
               quality={100}
-              className="object-contain z-10 w-[30%] min-h-min ml-3 shadow-lime-900"
+              className="object-contain z-10 w-[30%] min-h-min ml-12 shadow-2xl shadow-neutral-800 "
             ></Image>
           </div>
-          {/* <Image
-            src={`${BASE_IMAGE_URL}${movie.backdrop_path}`}
-            layout="fill"
-            alt=""
-            objectFit="cover"
-            className="object-cover object-[20vw 20vw]"
-            // objectPosition="left"
-          ></Image> */}
         </div>
         <p>{movie.overview}</p>
         <p>{movie.tagline}</p>
