@@ -12,17 +12,13 @@ const HeaderItem = ({ title, Icon, url }: Props) => {
     <Link href={url}>
       <div className="group flex w-12 cursor-pointer flex-col items-center hover:text-white sm:w-20">
         <Icon className="mb-1 h-8 group-hover:animate-bounce" />
-        <p className="tracking-widest opacity-0 group-hover:opacity-100">
-          {title}
-        </p>
+        <p className="tracking-widest invisible group-hover:visible">{title}</p>
       </div>
     </Link>
   ) : (
     <div className="group flex w-12 cursor-pointer flex-col items-center hover:text-white sm:w-20">
       <Icon className="mb-1 h-8 group-hover:animate-bounce" />
-      <p className="tracking-widest opacity-0 group-hover:opacity-100">
-        {title}
-      </p>
+      <p className="tracking-widest invisible group-hover:visible">{title}</p>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { NextPage, GetServerSideProps, GetServerSidePropsResult } from 'next';
+import { getPlaiceholder } from 'plaiceholder';
+import MoviesDetail from '../../src/components/MoviesDetail/MoviesDetail';
 import { TMovie, TMoviePagePropResult } from '../../type';
-
-type Props = { movie: TMovie };
-const MoviePage: NextPage<Props> = ({ movie }: Props) => {
-  return <div>{movie.id}</div>;
-};
+import { BASE_IMAGE_URL } from '../../src/utilities/helpers';
+type Props = { movie: TMovie; imageProps: any };
+const MoviePage: NextPage<Props> = ({ movie, imageProps }: Props) => (
+  <MoviesDetail movie={movie} imageProps={imageProps} />
+);
 export default MoviePage;
 
 export const fetchMovieById = async (apiKey: string, movieId: string) => {
@@ -39,12 +41,20 @@ export const getServerSideProps: GetServerSideProps<
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
+
   try {
     if (typeof params !== 'undefined') {
       const response = await fetchMovieById(apiKey, params.movieId);
+      const { backdrop_path, poster_path } = response;
+      //TODO FINISH BLUR
+      const { base64, img } = await getPlaiceholder(
+        `${BASE_IMAGE_URL}${backdrop_path ? backdrop_path : poster_path}`
+      );
+
       return {
         props: {
           movie: response,
+          imageProps: { blurDataURL: base64, ...img },
         },
       };
     }

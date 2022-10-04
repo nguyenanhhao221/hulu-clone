@@ -17,3 +17,5 @@ export const addTopTrendTopRated = (
   arr.unshift(topTrendObj, topRatedObj);
   return arr;
 };
+
+export const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original';

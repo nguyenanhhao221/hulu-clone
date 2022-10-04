@@ -25,6 +25,10 @@ export type TMovie = {
   vote_count?: number;
   video?: boolean;
   vote_average?: number;
+  tagline?: string;
+  runtime?: string | number;
+  genres?: TGenres;
+  homepage?: string;
 };
 
 export type TUserPropResult = {
@@ -34,4 +38,5 @@ export type TUserPropResult = {
 
 export type TMoviePagePropResult = {
   movie: TMovie;
+  imageProps?: any;
 };
