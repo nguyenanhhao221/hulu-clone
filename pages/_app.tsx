@@ -95,7 +95,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:title" content="Hulu Clone 2.0 by Hao Nguyen" />
         <meta property="og:url" content="https://projects.haonguyen.tech" />
         <meta property="og:type" content="website" />
-        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <meta
+          property="og:image"
+          content="https://res.cloudinary.com/dspmtoehq/image/upload/v1664907742/HuluCloneMock_ejozgu.png"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Head>
       <Header></Header>
       <Component {...pageProps} />
