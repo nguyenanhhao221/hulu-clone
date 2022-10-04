@@ -78,9 +78,24 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://projects.haonguyen.tech/" />
         <meta name="msapplication-TileColor" content="##06202A" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#06202A" />
+        <meta name="title" content="Hulu Clone 2.0" />
+        <meta
+          name="keywords"
+          content="Project, Movies, Hulu, NextJS, TailwindCSS"
+        />
+        <meta
+          name="description"
+          content="A Clone of Hulu Using NextJS, TailwindCSS and TMDB Database. "
+        />
+        <meta name="author" content="Hao Nguyen" />
+        <meta property="og:title" content="Hulu Clone 2.0 by Hao Nguyen" />
+        <meta property="og:url" content="https://projects.haonguyen.tech" />
+        <meta property="og:type" content="website" />
+        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
       </Head>
       <Header></Header>
       <Component {...pageProps} />
