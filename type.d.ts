@@ -40,3 +40,9 @@ export type TMoviePagePropResult = {
   movie: TMovie;
   imageProps?: any;
 };
+
+export type TFetchDetailParams = {
+  apiKey: string;
+  id: string;
+  category: 'movie' | 'tv';
+};

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { TDataTopRated, TGenres, TMovie } from '../../type';
+import { TDataTopRated, TGenres, TMovie, TFetchDetailParams } from '../../type';
 import { getUnique, addTopTrendTopRated } from './helpers';
 
 const fetchGenres = async (url: string, apiKey: string) => {
@@ -109,6 +109,34 @@ export const fetchGenresMovies = async (
       options
     );
     return response.data.results;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      const err = error as Error;
+      throw new Error(err.message);
+    }
+  }
+};
+
+export const fetchMovieById = async ({
+  apiKey,
+  id,
+  category,
+}: TFetchDetailParams) => {
+  const baseURL = `https://api.themoviedb.org/3/${category}`;
+  const url = `/${id}`;
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      language: 'en-us',
+      movie_id: id,
+    },
+    baseURL,
+  };
+  try {
+    const response: AxiosResponse<TMovie> = await axios(url, options);
+    return response.data;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);
