@@ -14,6 +14,7 @@ import {
   fetchTopTrendingMovies,
 } from '../../src/utilities/requests';
 import Title from '../../src/components/Title/Title';
+import TabList from '../../src/components/Utils/TabList';
 
 type Props = {
   genres: TGenres;
@@ -25,6 +26,7 @@ const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
     <div>
       <Navbar genres={genres}></Navbar>
       <Title genres={genres}></Title>
+      <TabList />
       <Movies movies={movies}></Movies>
     </div>
   );
