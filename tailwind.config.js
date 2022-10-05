@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         'hulu-main': '#06202A',
+        'hulu-sub': '#183949',
         'hulu-green': '#1ce783',
       },
       screens: {
@@ -12,5 +13,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwind-scrollbar-hide')],
+  plugins: [require('tailwind-scrollbar-hide'), require('daisyui')],
 };

@@ -1,11 +1,12 @@
 import Image from 'next/future/image';
 import type { TMovie } from '../../../type';
 import { BASE_IMAGE_URL } from '../../utilities/helpers';
+import MovieOverview from './MovieOverview';
 
 type Props = { movie: TMovie; imageProps: any };
 const MoviesDetail = ({ movie, imageProps }: Props) => {
   return (
-    <>
+    <main>
       <div className="">
         <div className="relative">
           <Image
@@ -18,7 +19,7 @@ const MoviesDetail = ({ movie, imageProps }: Props) => {
             placeholder="blur"
             quality={50}
           ></Image>
-          <div className="w-full h-1/2 absolute inset-y-4">
+          <div className="w-full h-1/2 absolute inset-y-4 xl:inset-y-28">
             <Image
               src={`${BASE_IMAGE_URL}${movie.poster_path}`}
               alt={`Backdrop for ${
@@ -28,25 +29,13 @@ const MoviesDetail = ({ movie, imageProps }: Props) => {
               width={200}
               height={150}
               quality={100}
-              className="object-contain z-10 w-[30%] min-h-min ml-12 shadow-2xl shadow-neutral-800 "
+              className="object-contain z-10 w-[30%] min-h-min ml-12 shadow-2xl shadow-neutral-800"
             ></Image>
           </div>
         </div>
-        <p>{movie.overview}</p>
-        <p>{movie.tagline}</p>
-        <p>User score{movie.vote_average}</p>
-        <ul>
-          {movie.genres?.map((genre) => (
-            <li key={genre.id}>{genre.name}</li>
-          ))}
-        </ul>
+        <MovieOverview movie={movie}></MovieOverview>
       </div>
-      <div>
-        <p>{`Visit homepage: ${movie.homepage}`}</p>
-        <p>{`Release date: ${movie.release_date}`}</p>
-        <p>{`Run Time : ${movie.runtime}`}</p>
-      </div>
-    </>
+    </main>
   );
 };
 export default MoviesDetail;
