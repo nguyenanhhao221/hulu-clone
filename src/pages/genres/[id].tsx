@@ -4,51 +4,40 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import Navbar from '../../src/components/Navbar/Navbar';
-import Movies from '../../src/components/Movies/Movies';
-import { TGenres, TMovie, TUserPropResult } from '../../type';
+import type { TCategory, TGenre, TMovie, TUserPropResult } from '../../../type';
 import {
   fetchAllGenres,
-  fetchGenresMovies,
-  fetchTopRatedMovies,
-  fetchTopTrendingMovies,
-} from '../../src/utilities/requests';
-import Title from '../../src/components/Title/Title';
+  fetchByGenres,
+  fetchPopular,
+  fetchTopRated,
+  getUniqueGenres,
+} from '../../utilities/requests';
+import Home from '../../components/Home/Home';
+import { addTopTrendTopRated } from '../../utilities/helpers';
 
 type Props = {
-  genres: TGenres;
-  movies: TMovie[];
+  genres: TGenre[][];
+  movies: TMovie[][];
 };
-
-const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
-  return (
-    <div>
-      <Navbar genres={genres}></Navbar>
-      <Title genres={genres}></Title>
-      <Movies movies={movies}></Movies>
-    </div>
-  );
-};
-export default HomePage;
 
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
-  const allGenres = await fetchAllGenres(apiKey);
+  const allGenres = await getUniqueGenres(apiKey, categories);
   const paths = allGenres.map((genre) => ({
     params: { id: genre.id.toString() },
   }));
   return {
     paths,
-    fallback: false, //*Look up in doc
+    fallback: false, //*Look up in doc. blocking mean that only build these path first
   };
 };
 
 //We need the props 'movies' which will depends on the external database.
 //Depends on the path we will make different call to the database to get these props. Since the path is also depends on external database, we will need getStaticPaths.
-//Revalidate options will make this page rebuild every 60 seconds.
+//Revalidate options will make this page rebuild every 10 seconds.
 export const getStaticProps: GetStaticProps<
   TUserPropResult,
   { id: string }
@@ -58,23 +47,29 @@ export const getStaticProps: GetStaticProps<
     throw new Error('apiKey does not exist in ENV');
 
   try {
-    const genres = await fetchAllGenres(apiKey);
-    let movies;
+    const genres = await fetchAllGenres(apiKey, categories);
+    let movies: TMovie[][] | undefined;
     if (typeof params !== 'undefined') {
       if (params.id === 'top-rated') {
-        movies = await fetchTopRatedMovies(apiKey);
-      } else if (params.id === 'top-trending') {
-        movies = await fetchTopTrendingMovies(apiKey);
+        movies = await fetchTopRated(apiKey, categories);
+      } else if (params.id === 'popular') {
+        movies = await fetchPopular(apiKey, categories);
       } else {
-        movies = await fetchGenresMovies(apiKey, params.id);
+        movies = await fetchByGenres(apiKey, params.id, categories);
       }
     }
     return {
       props: {
-        genres,
+        genres: genres.map((genre) =>
+          addTopTrendTopRated(
+            genre,
+            { id: 'popular', name: 'Most Popular' },
+            { id: 'top-rated', name: 'Top Rated' }
+          )
+        ),
         movies,
       },
-      revalidate: 60,
+      revalidate: 10,
     };
   } catch (error) {
     if (error instanceof Error) {
@@ -85,3 +80,15 @@ export const getStaticProps: GetStaticProps<
     }
   }
 };
+
+//!THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
+const categories: TCategory[] = ['movie', 'tv'];
+
+const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
+  return (
+    <>
+      <Home movies={movies} genres={genres} />
+    </>
+  );
+};
+export default HomePage;

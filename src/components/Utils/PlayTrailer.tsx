@@ -1,5 +1,4 @@
-type Props = {};
-const PlayTrailer = (props: Props) => {
+const PlayTrailer = () => {
   return (
     //TODO implement play trailer popup
     <button type="button" className="flex group gap-2 items-center">

@@ -7,3 +7,9 @@
     @apply bg-hulu-main text-gray-300;
   }
 }
+
+@layer components {
+  .tab-lifted.tab-active {
+    @apply bg-hulu-green text-zinc-900;
+  }
+}

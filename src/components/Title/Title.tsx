@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
-import type { TGenres } from '../../../type';
+import type { TGenre } from '../../../type';
 
 type Props = {
-  genres: TGenres;
+  genres: TGenre[][];
 };
 const Title = ({ genres }: Props) => {
   const router = useRouter();
-  const [title] = genres.filter((genre) => {
+  const [title] = genres.flat(1).filter((genre) => {
     //Because query is as string type and id genre is store as number
     return genre.id.toString() === router.query.id;
   });
