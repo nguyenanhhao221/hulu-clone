@@ -16,11 +16,11 @@ const Navbar = ({ genres }: Props) => {
   }
   return (
     <nav className="relative">
-      <ul className="flex space-x-10 overflow-x-scroll whitespace-nowrap px-4 scrollbar-hide last:pr-24 sm:space-x-20">
+      <ul className="flex space-x-10 overflow-x-scroll whitespace-nowrap px-4 scrollbar-hide sm:space-x-20 ">
         {genre.map(({ name, id }) => (
           <li
             key={id}
-            className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white active:text-red-500"
+            className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white last:pr-24 active:text-red-500"
           >
             <Link href={`/genres/${id}`}>{name}</Link>
           </li>
