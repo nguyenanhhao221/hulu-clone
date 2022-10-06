@@ -1,16 +1,29 @@
 import { NextPage, GetServerSideProps, GetServerSidePropsResult } from 'next';
 import { getPlaiceholder } from 'plaiceholder';
 import MoviesDetail from '../../components/MoviesDetail/MoviesDetail';
-import {
+import type {
   TFetchDetailParams,
+  TImageProps,
   TMovie,
   TMoviePagePropResult,
 } from '../../../type';
 import { BASE_IMAGE_URL } from '../../utilities/helpers';
 import { fetchMovieById } from '../../utilities/requests';
-type Props = { movie: TMovie; imageProps: any };
-const MoviePage: NextPage<Props> = ({ movie, imageProps }: Props) => (
-  <MoviesDetail movie={movie} imageProps={imageProps} />
+type Props = {
+  movie: TMovie;
+  backdropImagesProps: TImageProps;
+  posterImagesProps: TImageProps;
+};
+const MoviePage: NextPage<Props> = ({
+  movie,
+  backdropImagesProps,
+  posterImagesProps,
+}: Props) => (
+  <MoviesDetail
+    movie={movie}
+    backdropImagesProps={backdropImagesProps}
+    posterImagesProps={posterImagesProps}
+  />
 );
 export default MoviePage;
 
@@ -33,15 +46,21 @@ export const getServerSideProps: GetServerSideProps<
       };
       const response = await fetchMovieById(paramsFetchDetail);
       const { backdrop_path, poster_path } = response;
-      //TODO FINISH BLUR
-      const { base64, img } = await getPlaiceholder(
-        `${BASE_IMAGE_URL}${backdrop_path ? backdrop_path : poster_path}`
-      );
-
+      const [backdropImageProps, posterImageProps] = await Promise.all([
+        getPlaiceholder(`${BASE_IMAGE_URL}${backdrop_path}`),
+        getPlaiceholder(`${BASE_IMAGE_URL}${poster_path}`),
+      ]);
       return {
         props: {
           movie: response,
-          imageProps: { blurDataURL: base64, ...img },
+          backdropImagesProps: {
+            blurDataURL: backdropImageProps.base64,
+            ...backdropImageProps.img,
+          },
+          posterImagesProps: {
+            blurDataURL: posterImageProps.base64,
+            ...posterImageProps.img,
+          },
         },
       };
     }

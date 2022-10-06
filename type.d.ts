@@ -37,9 +37,19 @@ export type TUserPropResult = {
 
 export type TMoviePagePropResult = {
   movie: TMovie;
-  imageProps?: any;
+  backdropImagesProps: TImageProps;
+  posterImagesProps: TImageProps;
 };
+export type TImageProps = {
+  blurDataURL: string;
+} & TImageProps;
 
+type TImageReturn = {
+  height: number;
+  width: number;
+  src: string;
+  type: string;
+};
 export type TFetchDetailParams = {
   apiKey: string;
   id: string;
