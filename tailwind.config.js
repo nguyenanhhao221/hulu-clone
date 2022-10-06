@@ -13,5 +13,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwind-scrollbar-hide'), require('daisyui')],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('daisyui'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };

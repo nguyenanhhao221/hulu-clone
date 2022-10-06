@@ -32,7 +32,7 @@ const MovieCard = ({ movie, index }: Props) => {
           }
         ></Image>
         <div className="space-y-1">
-          <p className="truncate ">{movie.overview}</p>
+          <p className="line-clamp-2 ">{movie.overview}</p>
           <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out motion-safe:group-hover:font-extrabold">
             {movie.original_language === 'en'
               ? movie.original_title || movie.name

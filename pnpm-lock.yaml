@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@heroicons/react': ^2.0.11
   '@plaiceholder/next': ^2.5.0
+  '@tailwindcss/line-clamp': ^0.4.2
   '@types/node': 18.7.23
   '@types/prettier': ^2.7.1
   '@types/react': 18.0.21
@@ -39,6 +40,7 @@ dependencies:
   sharp: 0.31.1
 
 devDependencies:
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
   '@types/node': 18.7.23
   '@types/prettier': 2.7.1
   '@types/react': 18.0.21
@@ -286,6 +288,14 @@ packages:
     dependencies:
       tslib: 2.4.0
     dev: false
+
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.1.8_postcss@8.4.16
+    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
