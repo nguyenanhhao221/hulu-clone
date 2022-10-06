@@ -134,6 +134,7 @@ export const fetchMovieById = async ({
       api_key: apiKey,
       language: 'en-us',
       movie_id: id,
+      tv_id: id,
     },
     baseURL,
   };

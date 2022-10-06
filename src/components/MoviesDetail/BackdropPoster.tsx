@@ -17,9 +17,11 @@ function BackdropPoster({
       <Image
         {...backdropImagesProps}
         alt={`Backdrop for ${original_title ? original_title : 'movie'}`}
-        className=" object-cover object-right w-full z-1 fill-red-700  blur-[0.5px]"
+        className=" object-cover object-right-bottom w-full z-1 ]"
         sizes="100vw"
         placeholder="blur"
+        height={100}
+        width={100}
         quality={100}
       ></Image>
       <div className="w-full h-1/2 absolute inset-y-4 xl:inset-y-28">

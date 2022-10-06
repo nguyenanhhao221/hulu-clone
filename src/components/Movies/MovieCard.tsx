@@ -1,8 +1,10 @@
 import { HandThumbUpIcon } from '@heroicons/react/24/outline';
 import Image from 'next/future/image';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { TMovie } from '../../../type';
 import { BASE_IMAGE_URL } from '../../utilities/helpers';
+import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 
 type Props = {
   movie: TMovie;
@@ -10,10 +12,10 @@ type Props = {
 };
 const MovieCard = ({ movie, index }: Props) => {
   // *This is to get the image from TMDB. Read more :https://developers.themoviedb.org/3/getting-started/images
-
+  const { category } = useContext(CategoryContextProvider);
   return (
-    <Link href={`/movie/${movie.id}`}>
-      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  motion-safe:hover:scale-105">
+    <Link href={`/watch/${category}/${movie.id}`}>
+      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105">
         <Image
           className="h-auto max-w-full object-contain"
           width={1920}
@@ -33,7 +35,7 @@ const MovieCard = ({ movie, index }: Props) => {
         ></Image>
         <div className="space-y-1">
           <p className="line-clamp-2 ">{movie.overview}</p>
-          <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out motion-safe:group-hover:font-extrabold">
+          <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out md:motion-safe:group-hover:font-extrabold">
             {movie.original_language === 'en'
               ? movie.original_title || movie.name
               : movie.title || movie.original_name}

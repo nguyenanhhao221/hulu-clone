@@ -9,11 +9,11 @@ const MovieOverview = ({ movie }: Props) => {
     <section className="Movie Detail py-2">
       <div className="space-y-4">
         <h2 className="text-center font-bold text-2xl ">
-          {movie.original_title}{' '}
-          <time className=" text-sm text-gray-300 font-light">{`(${movie.release_date?.substring(
-            0,
-            4
-          )})`}</time>
+          {movie.original_title || movie.original_name}{' '}
+          <time className=" text-sm text-gray-300 font-light">{`(${
+            movie.release_date?.substring(0, 4) ||
+            movie.first_air_date?.substring(0, 4)
+          })`}</time>
         </h2>
         <div className="flex flex-row justify-around">
           <UserScore vote_average={movie.vote_average} />
@@ -22,12 +22,13 @@ const MovieOverview = ({ movie }: Props) => {
         </div>
         <div className="flex flex-col items-center space-y-4 py-4">
           <div className="flex space-x-4">
-            <time>{`${movie.release_date} (US)`}</time>
+            <time>{`${movie.release_date || movie.first_air_date}`}</time>
             <time className="text-gray-300">{`${convertTime(
-              Number(movie.runtime)
+              Number(movie.runtime) ||
+                Number(movie.next_episode_to_air?.runtime)
             )}`}</time>
           </div>
-          <ul className="flex">
+          <ul className="flex flex-col items-center text-center md:flex-row">
             {movie.genres?.map((genre, index, genreArr) => (
               //Add "," to each element except the last
               <li className="px-1" key={genre.id}>

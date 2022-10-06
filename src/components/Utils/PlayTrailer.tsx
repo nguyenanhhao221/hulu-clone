@@ -6,7 +6,7 @@ const PlayTrailer = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="w-6 h-6 group-hover:fill-hulu-green"
+        className="w-6 h-6 group-hover:fill-hulu-green group-hover:animate-bounce"
       >
         <path
           fillRule="evenodd"
@@ -14,7 +14,7 @@ const PlayTrailer = () => {
           clipRule="evenodd"
         />
       </svg>
-      <span className="group-hover:text-hulu-green">Play trailer </span>
+      <span className="group-hover:text-hulu-green ">Play trailer </span>
     </button>
   );
 };
