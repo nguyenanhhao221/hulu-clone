@@ -1,9 +1,13 @@
 import { NextPage, GetServerSideProps, GetServerSidePropsResult } from 'next';
 import { getPlaiceholder } from 'plaiceholder';
-import MoviesDetail from '../../src/components/MoviesDetail/MoviesDetail';
-import { TFetchDetailParams, TMovie, TMoviePagePropResult } from '../../type';
-import { BASE_IMAGE_URL } from '../../src/utilities/helpers';
-import { fetchMovieById } from '../../src/utilities/requests';
+import MoviesDetail from '../../components/MoviesDetail/MoviesDetail';
+import {
+  TFetchDetailParams,
+  TMovie,
+  TMoviePagePropResult,
+} from '../../../type';
+import { BASE_IMAGE_URL } from '../../utilities/helpers';
+import { fetchMovieById } from '../../utilities/requests';
 type Props = { movie: TMovie; imageProps: any };
 const MoviePage: NextPage<Props> = ({ movie, imageProps }: Props) => (
   <MoviesDetail movie={movie} imageProps={imageProps} />

@@ -13,7 +13,7 @@ const Title = ({ genres }: Props) => {
 
   return (
     <h2 className="decoration-3 p-6 text-center text-3xl font-bold tracking-wide underline decoration-hulu-green underline-offset-8 md:text-left">
-      {title.name}
+      {/* {title.name} */}
     </h2>
   );
 };

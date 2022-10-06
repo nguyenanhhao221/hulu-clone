@@ -4,15 +4,15 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import type { TCategory, TGenre, TMovie, TUserPropResult } from '../../type';
+import type { TCategory, TGenre, TMovie, TUserPropResult } from '../../../type';
 import {
   fetchAllGenres,
   fetchByGenres,
   fetchPopular,
   fetchTopRated,
   getUniqueGenres,
-} from '../../src/utilities/requests';
-import Home from '../../src/components/Home/Home';
+} from '../../utilities/requests';
+import Home from '../../components/Home/Home';
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
