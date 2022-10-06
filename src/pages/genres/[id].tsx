@@ -13,6 +13,7 @@ import {
   getUniqueGenres,
 } from '../../utilities/requests';
 import Home from '../../components/Home/Home';
+import { addTopTrendTopRated } from '../../utilities/helpers';
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
@@ -53,7 +54,13 @@ export const getStaticProps: GetStaticProps<
     }
     return {
       props: {
-        genres,
+        genres: genres.map((genre) =>
+          addTopTrendTopRated(
+            genre,
+            { id: 'popular', name: 'Most Popular' },
+            { id: 'top-rated', name: 'Top Rated' }
+          )
+        ),
         movies,
       },
       revalidate: 10,

@@ -91,8 +91,8 @@ export const getUniqueGenres = async (
   const uniqueResult = getUnique(resultArr);
   return addTopTrendTopRated(
     uniqueResult,
-    { id: 'top-rated', name: 'Top Rated' },
-    { id: 'top-trend', name: 'Top Trend' }
+    { id: 'popular', name: 'Most Popular' },
+    { id: 'top-rated', name: 'Top Rated' }
   );
 };
 
