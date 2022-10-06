@@ -34,7 +34,7 @@ export type TMovie = {
 };
 export type TCategory = 'tv' | 'movie'
 export type TUserPropResult = {
-  genres: TGenres;
+  genres: TGenres[];
   movies?: TMovie[][];
 };
 

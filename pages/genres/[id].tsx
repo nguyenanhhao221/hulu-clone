@@ -11,10 +11,9 @@ import {
   fetchAllGenres,
   fetchGenresMovies,
   fetchPopular,
-  fetchTopRatedMovies,
+  fetchTopRated,
 } from '../../src/utilities/requests';
 import Title from '../../src/components/Title/Title';
-
 type Props = {
   genres: TGenres;
   movies: TMovie[];
@@ -36,13 +35,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
-  const allGenres = await fetchAllGenres(apiKey);
+  const allGenres = await fetchAllGenres(apiKey, categories);
   const paths = allGenres.map((genre) => ({
     params: { id: genre.id.toString() },
   }));
   return {
     paths,
-    fallback: false, //*Look up in doc
+    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -58,11 +57,11 @@ export const getStaticProps: GetStaticProps<
     throw new Error('apiKey does not exist in ENV');
 
   try {
-    const genres = await fetchAllGenres(apiKey);
+    const genres = await fetchAllGenres(apiKey, categories);
     let movies;
     if (typeof params !== 'undefined') {
       if (params.id === 'top-rated') {
-        movies = await fetchTopRatedMovies(apiKey);
+        movies = await fetchTopRated(apiKey, categories);
       } else if (params.id === 'top-trend') {
         movies = await fetchPopular(apiKey, categories);
       } else {
@@ -74,7 +73,7 @@ export const getStaticProps: GetStaticProps<
         genres,
         movies,
       },
-      revalidate: 60,
+      revalidate: 10,
     };
   } catch (error) {
     if (error instanceof Error) {

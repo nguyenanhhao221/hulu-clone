@@ -14,6 +14,7 @@ const baseOptions: AxiosRequestConfig = {
 };
 const axiosTMDB = axios.create(baseOptions);
 
+//Get Popular movies and Tv show 
 export const fetchPopular = async (apiKey: string, categories: TCategory[]) => {
   const options: AxiosRequestConfig = {
     params: {
@@ -28,6 +29,22 @@ export const fetchPopular = async (apiKey: string, categories: TCategory[]) => {
   }))
   return resultArr
 };
+//Get TopRated movies and Tv show 
+export const fetchTopRated = async (apiKey: string, categories: TCategory[]) => {
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      page: 1,
+    }
+  }
+  const resultArr = await Promise.all(categories.map(async (eachCategory) => {
+   const urlEndpoints = `/${eachCategory}/top_rated`
+    const response: AxiosResponse<TDataTopRated> = await  axiosTMDB(urlEndpoints, options);
+    return response.data.results
+  }))
+  return resultArr
+};
+
 const fetchGenres = async (url: string, apiKey: string) => {
   try {
     const response: AxiosResponse<{ genres: TGenres }> = await axios.get(url, {
@@ -50,56 +67,47 @@ const fetchGenres = async (url: string, apiKey: string) => {
     }
   }
 };
-export const fetchAllGenres = async (apiKey: string) => {
-  const genresMoviesURL = 'https://api.themoviedb.org/3/genre/movie/list';
-  const genresTvURL = 'https://api.themoviedb.org/3/genre/tv/list';
-  try {
-    const result = await Promise.all([
-      fetchGenres(genresMoviesURL, apiKey),
-      fetchGenres(genresTvURL, apiKey),
-    ]);
-    const uniqueResult = getUnique(result);
+export const fetchAllGenres = async (apiKey: string, categories: TCategory[]) => {
+  // const genresMoviesURL = 'https://api.themoviedb.org/3/genre/movie/list';
+  // const genresTvURL = 'https://api.themoviedb.org/3/genre/tv/list';
+  // try {
+  //   const result = await Promise.all([
+  //     fetchGenres(genresMoviesURL, apiKey),
+  //     fetchGenres(genresTvURL, apiKey),
+  //   ]);
+  //   const uniqueResult = getUnique(result);
+  //   return addTopTrendTopRated(
+  //     uniqueResult,
+  //     { id: 'top-rated', name: 'Top Rated' },
+  //     { id: 'top-trend', name: 'Top Trend' }
+  //   );
+  // } catch (error) {
+  //   if (error instanceof Error) {
+  //     throw new Error(error.message);
+  //   } else {
+  //     const err = error as Error;
+  //     throw new Error(err.message);
+  //   }
+  // }
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+    }
+  }
+  const resultArr = await Promise.all(categories.map(async (eachCategory) => {
+   const urlEndpoints = `/genre/${eachCategory}/list`
+    const response: AxiosResponse<{ genres: TGenres }>  = await  axiosTMDB(urlEndpoints, options);
+    return response.data.genres
+  }))
+    const uniqueResult = getUnique(resultArr);
     return addTopTrendTopRated(
       uniqueResult,
       { id: 'top-rated', name: 'Top Rated' },
       { id: 'top-trend', name: 'Top Trend' }
     );
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      const err = error as Error;
-      throw new Error(err.message);
-    }
-  }
 };
 
-export const fetchTopRatedMovies = async (apiKey: string) => {
-  const topRatedURL = 'https://api.themoviedb.org/3/movie/top_rated';
-  const options: AxiosRequestConfig = {
-    params: {
-      api_key: apiKey,
-      language: 'en-US',
-      page: 1,
-    },
-  };
-  try {
-    const response: AxiosResponse<TDataTopRated> = await axios.get(
-      topRatedURL,
-      options
-    );
-    if (response.status === 200) {
-      return response.data.results;
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      const err = error as Error;
-      throw new Error(err.message);
-    }
-  }
-};
+
 export const fetchTopTrendingMovies = async (apiKey: string) => {
   const topTrendingURL = 'https://api.themoviedb.org/3/trending/all/week';
   const options: AxiosRequestConfig = {
