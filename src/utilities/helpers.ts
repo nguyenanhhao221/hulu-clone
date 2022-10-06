@@ -1,6 +1,6 @@
-import type { TGenres, TGenre } from '../../type';
+import type { TGenre } from '../../type';
 
-export const getUnique = (arr: TGenres[]) => {
+export const getUnique = (arr: TGenre[][]) => {
   //* Merge 1 level deep of nested array
   const mergeArr = arr.flat(1);
   const arrayUniqueByKey = [
@@ -10,10 +10,10 @@ export const getUnique = (arr: TGenres[]) => {
 };
 
 export const addTopTrendTopRated = (
-  arr: TGenres,
+  arr: TGenre[],
   topTrendObj: TGenre,
   topRatedObj: TGenre
-): TGenres => {
+): TGenre[] => {
   arr.unshift(topTrendObj, topRatedObj);
   return arr;
 };

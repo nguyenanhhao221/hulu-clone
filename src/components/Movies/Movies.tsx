@@ -3,7 +3,7 @@ import { TMovie } from '../../../type';
 import TabList from '../Utils/TabList';
 import MovieCard from './MovieCard';
 type Props = {
-  movies?: Array<TMovie[]>;
+  movies?: TMovie[][];
 };
 const Movies = ({ movies }: Props) => {
   const [currentTab, setCurrentTab] = useState<string>('movie');

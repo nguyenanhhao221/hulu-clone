@@ -1,15 +1,23 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { TGenres } from '../../../type';
+import { useContext } from 'react';
+import { TGenre } from '../../../type';
+import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 
 type Props = {
-  genres: TGenres;
+  genres: TGenre[][];
 };
 const Navbar = ({ genres }: Props) => {
+  //We base the Navbar depends on the category, anytime this category changes, Navbar will need to update to match all the genres available in that category.
+  const { category } = useContext(CategoryContextProvider);
+
+  let genre: TGenre[] = genres[0];
+  if (category === 'tv') {
+    genre = genres[1];
+  }
   return (
     <nav className="relative">
       <ul className="flex space-x-10 overflow-x-scroll whitespace-nowrap px-4 scrollbar-hide last:pr-24 sm:space-x-20">
-        {genres?.map(({ name, id }) => (
+        {genre.map(({ name, id }) => (
           <li
             key={id}
             className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white active:text-red-500"

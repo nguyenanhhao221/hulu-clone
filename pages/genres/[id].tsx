@@ -4,38 +4,21 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import Navbar from '../../src/components/Navbar/Navbar';
-import Movies from '../../src/components/Movies/Movies';
-import { TCategory, TGenres, TMovie, TUserPropResult } from '../../type';
+import type { TCategory, TGenre, TMovie, TUserPropResult } from '../../type';
 import {
   fetchAllGenres,
-  fetchGenresMovies,
+  fetchByGenres,
   fetchPopular,
   fetchTopRated,
+  getUniqueGenres,
 } from '../../src/utilities/requests';
-import Title from '../../src/components/Title/Title';
-type Props = {
-  genres: TGenres;
-  movies: TMovie[];
-};
-const categories: TCategory[] = ['movie', 'tv']; //THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
-const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
-  return (
-    <div>
-      <Navbar genres={genres}></Navbar>
-      <Title genres={genres}></Title>
-      <Movies movies={movies}></Movies>
-    </div>
-  );
-};
-export default HomePage;
-
+import Home from '../../src/components/Home/Home';
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
-  const allGenres = await fetchAllGenres(apiKey, categories);
+  const allGenres = await getUniqueGenres(apiKey, categories);
   const paths = allGenres.map((genre) => ({
     params: { id: genre.id.toString() },
   }));
@@ -47,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 //We need the props 'movies' which will depends on the external database.
 //Depends on the path we will make different call to the database to get these props. Since the path is also depends on external database, we will need getStaticPaths.
-//Revalidate options will make this page rebuild every 60 seconds.
+//Revalidate options will make this page rebuild every 10 seconds.
 export const getStaticProps: GetStaticProps<
   TUserPropResult,
   { id: string }
@@ -65,7 +48,7 @@ export const getStaticProps: GetStaticProps<
       } else if (params.id === 'top-trend') {
         movies = await fetchPopular(apiKey, categories);
       } else {
-        movies = await fetchGenresMovies(apiKey, params.id);
+        movies = await fetchByGenres(apiKey, params.id, categories);
       }
     }
     return {
@@ -84,3 +67,19 @@ export const getStaticProps: GetStaticProps<
     }
   }
 };
+type Props = {
+  genres: TGenre[][];
+  movies: TMovie[][];
+};
+
+//!THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
+const categories: TCategory[] = ['movie', 'tv'];
+
+const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
+  return (
+    <>
+      <Home movies={movies} genres={genres} />
+    </>
+  );
+};
+export default HomePage;

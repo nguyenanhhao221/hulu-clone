@@ -1,12 +1,10 @@
-export type TGenres = TGenre[];
-
 export interface TGenre {
   id: number | string; //string for special case only, in this case because we will use Top Trend and Top Rated
   name: string;
 }
-export type TDataTopRated = {
+export type TDataResponseTMDB = {
   page?: number;
-  results?: TMovie[];
+  results: TMovie[];
   total_pages?: number;
   total_results?: number;
 };
@@ -27,14 +25,13 @@ export type TMovie = {
   vote_average?: number;
   tagline?: string;
   runtime?: string | number;
-  genres?: TGenres;
+  genres?: TGenre[];
   homepage?: string;
   first_air_date?: string;
-  
 };
-export type TCategory = 'tv' | 'movie'
+export type TCategory = 'tv' | 'movie';
 export type TUserPropResult = {
-  genres: TGenres[];
+  genres: TGenre[][];
   movies?: TMovie[][];
 };
 

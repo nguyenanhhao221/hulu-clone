@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TCategory } from '../../../type';
+import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 
 type Props = {
   currentTab: string;
   setCurrentTab: React.Dispatch<React.SetStateAction<string>>;
 };
 function TabList({ currentTab, setCurrentTab }: Props) {
-  const unUsed = 1;
-  const categoriesButtons = [
+  //Use to update the category state so the movies and navbar can display correctly
+  const { setCategory } = useContext(CategoryContextProvider);
+  //This is separate to create the tab buttons
+  const categoriesButtons: {
+    id: TCategory;
+    category: string;
+  }[] = [
     {
       id: 'movie',
       category: 'Movie',
@@ -15,7 +22,6 @@ function TabList({ currentTab, setCurrentTab }: Props) {
       id: 'tv',
       category: 'TV',
     },
-   
   ];
   return (
     <div className="text-center ">
@@ -31,7 +37,10 @@ function TabList({ currentTab, setCurrentTab }: Props) {
             }`}
             type="button"
             key={category.id}
-            onClick={() => setCurrentTab(category.id)}
+            onClick={() => {
+              setCurrentTab(category.id);
+              setCategory(category.id);
+            }}
           >
             <span className="capitalize">{category.category}</span>
           </button>
