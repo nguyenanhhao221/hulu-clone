@@ -30,11 +30,11 @@ const MovieOverview = ({ movie }: Props) => {
           <ul className="flex">
             {movie.genres?.map((genre, index, genreArr) => (
               //Add "," to each element except the last
-              <ol className="px-1" key={genre.id}>
+              <li className="px-1" key={genre.id}>
                 {index === genreArr.length - 1
                   ? `${genre.name}`
                   : `${genre.name}, `}
-              </ol>
+              </li>
             ))}
           </ul>
         </div>
