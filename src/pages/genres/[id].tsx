@@ -14,6 +14,12 @@ import {
 } from '../../utilities/requests';
 import Home from '../../components/Home/Home';
 import { addTopTrendTopRated } from '../../utilities/helpers';
+
+type Props = {
+  genres: TGenre[][];
+  movies: TMovie[][];
+};
+
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
@@ -25,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
+    fallback: false, //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -42,11 +48,11 @@ export const getStaticProps: GetStaticProps<
 
   try {
     const genres = await fetchAllGenres(apiKey, categories);
-    let movies;
+    let movies: TMovie[][] | undefined;
     if (typeof params !== 'undefined') {
       if (params.id === 'top-rated') {
         movies = await fetchTopRated(apiKey, categories);
-      } else if (params.id === 'top-trend') {
+      } else if (params.id === 'popular') {
         movies = await fetchPopular(apiKey, categories);
       } else {
         movies = await fetchByGenres(apiKey, params.id, categories);
@@ -73,10 +79,6 @@ export const getStaticProps: GetStaticProps<
       throw new Error(err.message);
     }
   }
-};
-type Props = {
-  genres: TGenre[][];
-  movies: TMovie[][];
 };
 
 //!THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB

@@ -1,5 +1,4 @@
-type Props = {};
-const CastOverview = (props: Props) => {
+const CastOverview = () => {
   return <div>CastOverview</div>;
 };
 export default CastOverview;

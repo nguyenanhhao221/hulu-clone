@@ -7,7 +7,9 @@ const Home: NextPage = () => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {},
-    redirect: '/genres/top-rated',
+    redirect: {
+      destination: '/genres/popular',
+    },
   };
 };
 

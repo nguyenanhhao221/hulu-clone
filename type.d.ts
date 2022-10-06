@@ -28,6 +28,8 @@ export type TMovie = {
   genres?: TGenre[];
   homepage?: string;
   first_air_date?: string;
+  name?: string;
+  original_name?: string;
 };
 export type TCategory = 'tv' | 'movie';
 export type TUserPropResult = {

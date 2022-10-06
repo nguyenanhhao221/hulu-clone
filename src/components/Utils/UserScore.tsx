@@ -2,7 +2,7 @@ type Props = { vote_average?: number };
 const UserScore = ({ vote_average }: Props) => {
   if (!vote_average) return <span>User score is not available</span>;
   const roundedVote = (vote_average * 10).toFixed(0);
-  const circleStyle: {} = {
+  const circleStyle: Record<string, unknown> = {
     '--value': roundedVote,
     '--thickness': '3px',
     '--size': '50px',

@@ -35,17 +35,18 @@ const MovieCard = ({ movie, index }: Props) => {
           <p className="truncate ">{movie.overview}</p>
           <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out motion-safe:group-hover:font-extrabold">
             {movie.original_language === 'en'
-              ? movie.original_title
-              : movie.title}
+              ? movie.original_title || movie.name
+              : movie.title || movie.original_name}
           </h2>
           <p className="flex items-center justify-between">
             {movie.release_date ? (
               <span className="text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
                 {movie.release_date}
-              </span>)
-              : (<span className="text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
+              </span>
+            ) : (
+              <span className="text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
                 {movie.first_air_date}
-              </span> 
+              </span>
             )}
             {movie.vote_count && (
               <span className="flex items-center text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
