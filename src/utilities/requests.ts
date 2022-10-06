@@ -1,7 +1,33 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { TDataTopRated, TGenres, TMovie, TFetchDetailParams } from '../../type';
+import axios, {
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
+import type { TDataTopRated, TGenres, TMovie, TFetchDetailParams, TCategory } from '../../type';
 import { getUnique, addTopTrendTopRated } from './helpers';
 
+//Base axios function used to fetch to TMDB, check for category (movie or tv) then assign correct key and value to make the call.
+const baseOptions: AxiosRequestConfig = {
+  baseURL: 'https://api.themoviedb.org/3',
+  params: {
+    language: 'en_US',
+  },
+};
+const axiosTMDB = axios.create(baseOptions);
+
+export const fetchPopular = async (apiKey: string, categories: TCategory[]) => {
+  const options: AxiosRequestConfig = {
+    params: {
+      api_key: apiKey,
+      page: 1,
+    }
+  }
+ const resultArr = await Promise.all(categories.map(async (eachCategory) => {
+    const urlEndpoints = `/${eachCategory}/popular`
+    const response: AxiosResponse<TDataTopRated> = await  axiosTMDB(urlEndpoints, options);
+    return response.data.results
+  }))
+  return resultArr
+};
 const fetchGenres = async (url: string, apiKey: string) => {
   try {
     const response: AxiosResponse<{ genres: TGenres }> = await axios.get(url, {

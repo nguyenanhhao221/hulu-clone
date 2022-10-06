@@ -39,10 +39,13 @@ const MovieCard = ({ movie, index }: Props) => {
               : movie.title}
           </h2>
           <p className="flex items-center justify-between">
-            {movie.release_date && (
+            {movie.release_date ? (
               <span className="text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
                 {movie.release_date}
-              </span>
+              </span>)
+              : (<span className="text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">
+                {movie.first_air_date}
+              </span> 
             )}
             {movie.vote_count && (
               <span className="flex items-center text-gray-400 xl:opacity-0 xl:group-hover:opacity-100">

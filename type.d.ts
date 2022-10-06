@@ -29,11 +29,13 @@ export type TMovie = {
   runtime?: string | number;
   genres?: TGenres;
   homepage?: string;
+  first_air_date?: string;
+  
 };
-
+export type TCategory = 'tv' | 'movie'
 export type TUserPropResult = {
   genres: TGenres;
-  movies?: TMovie[];
+  movies?: TMovie[][];
 };
 
 export type TMoviePagePropResult = {

@@ -6,27 +6,25 @@ import {
 } from 'next';
 import Navbar from '../../src/components/Navbar/Navbar';
 import Movies from '../../src/components/Movies/Movies';
-import { TGenres, TMovie, TUserPropResult } from '../../type';
+import { TCategory, TGenres, TMovie, TUserPropResult } from '../../type';
 import {
   fetchAllGenres,
   fetchGenresMovies,
+  fetchPopular,
   fetchTopRatedMovies,
-  fetchTopTrendingMovies,
 } from '../../src/utilities/requests';
 import Title from '../../src/components/Title/Title';
-import TabList from '../../src/components/Utils/TabList';
 
 type Props = {
   genres: TGenres;
   movies: TMovie[];
 };
-
+const categories: TCategory[] = ['movie', 'tv']; //THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
 const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
   return (
     <div>
       <Navbar genres={genres}></Navbar>
       <Title genres={genres}></Title>
-      <TabList />
       <Movies movies={movies}></Movies>
     </div>
   );
@@ -65,8 +63,8 @@ export const getStaticProps: GetStaticProps<
     if (typeof params !== 'undefined') {
       if (params.id === 'top-rated') {
         movies = await fetchTopRatedMovies(apiKey);
-      } else if (params.id === 'top-trending') {
-        movies = await fetchTopTrendingMovies(apiKey);
+      } else if (params.id === 'top-trend') {
+        movies = await fetchPopular(apiKey, categories);
       } else {
         movies = await fetchGenresMovies(apiKey, params.id);
       }
