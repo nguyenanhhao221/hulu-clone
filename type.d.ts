@@ -32,23 +32,25 @@ export type TMovie = {
   first_air_date?: string;
   name?: string;
   original_name?: string;
-  next_episode_to_air?: {
-    air_date?: string;
-    episode_number?: number;
-    id?: number;
-    name?: string;
-    overview?: string;
-    production_code: string | number;
-    runtime?: number;
-    season_number?: number;
-    show_id?: number;
-    still_path?: string;
-    vote_average?: number;
-    vote_count?: number;
-  };
+  next_episode_to_air?: EpisodeToAir;
   episode_run_time?: number[];
   imageProps: ILoadImageImg & { blurDataURL?: string };
 };
+export type EpisodeToAir = {
+  air_date?: string;
+  episode_number?: number;
+  id?: number;
+  name?: string;
+  overview?: string;
+  production_code: string | number;
+  runtime?: number;
+  season_number?: number;
+  show_id?: number;
+  still_path?: string;
+  vote_average?: number;
+  vote_count?: number;
+};
+
 export type ILoadImageImg = {
   src: string | StaticImageData;
   height?: number | string;

@@ -1,7 +1,7 @@
 import UserScore from '../Utils/UserScore';
 import PlayTrailer from '../Utils/PlayTrailer';
-import { convertTime } from '../../utilities/helpers';
 import { TMovie } from '../../../type';
+import RunTime from './RunTime';
 
 type Props = { movie: TMovie };
 const MovieOverview = ({ movie }: Props) => {
@@ -21,13 +21,13 @@ const MovieOverview = ({ movie }: Props) => {
           <PlayTrailer />
         </div>
         <div className="flex flex-col items-center space-y-4 py-4">
-          <div className="flex space-x-4">
-            <time>{`${movie.release_date || movie.first_air_date}`}</time>
-            <time className="text-gray-300">{`${convertTime(
-              Number(movie.runtime) ||
-                Number(movie.next_episode_to_air?.runtime)
-            )}`}</time>
-          </div>
+          <RunTime
+            release_date={movie.release_date}
+            first_air_date={movie.first_air_date}
+            runtime={movie.runtime}
+            episode_run_time={movie.episode_run_time}
+            next_episode_to_air={movie.next_episode_to_air}
+          />
           <ul className="flex flex-col items-center text-center md:flex-row">
             {movie.genres?.map((genre, index, genreArr) => (
               //Add "," to each element except the last
