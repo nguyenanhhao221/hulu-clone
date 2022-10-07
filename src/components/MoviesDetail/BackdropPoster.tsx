@@ -44,10 +44,8 @@ function BackdropPoster({
             sizes={"33vw"}
             quality={100}
             placeholder={posterImagesProps ? "blur" : "empty"}
-            className={`shadow-neutral-800 hi z-[1] h-full 
-              object-contain object-center opacity-0 shadow-2xl ${
-                posterImagesProps && `opacity-0`
-              }`}
+            className={`shadow-neutral-800 hi z-[1] h-full object-contain 
+              object-center shadow-2xl ${!posterImagesProps && `opacity-0`}`}
           ></Image>
         </div>
         <DesktopMovieOverview movie={movie}></DesktopMovieOverview>
