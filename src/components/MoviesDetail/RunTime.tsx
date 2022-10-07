@@ -1,6 +1,6 @@
-import React from 'react';
-import { EpisodeToAir } from '../../../type';
-import { convertTime } from '../../utilities/helpers';
+import React from "react";
+import { EpisodeToAir } from "../../../type";
+import { convertTime } from "../../utilities/helpers";
 type Props = {
   release_date?: string;
   first_air_date?: string;
@@ -30,7 +30,7 @@ const RunTime = ({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="w-5 h-5"
+          className="h-5 w-5"
         >
           <path
             fillRule="evenodd"
@@ -41,12 +41,12 @@ const RunTime = ({
 
         {`${release_date || first_air_date}`}
       </time>
-      <time className="text-gray-300 flex items-center gap-1">
+      <time className="flex items-center gap-1 text-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="w-5 h-5 fill-gray-400"
+          className="h-5 w-5 fill-gray-400"
         >
           <path
             fillRule="evenodd"

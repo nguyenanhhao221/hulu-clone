@@ -1,6 +1,5 @@
 import type { TImageProps, TMovie } from '../../../type';
 import BackdropPoster from './BackdropPoster';
-import DesktopMovieOverview from './DesktopMovieOverView';
 // import CastOverview from './CastOverView';
 import MovieOverview from './MovieOverview';
 //TODO fix type of imageProps

@@ -20,5 +20,6 @@ module.exports = {
     require('tailwind-scrollbar-hide'),
     require('daisyui'),
     require('@tailwindcss/line-clamp'),
+    require('prettier-plugin-tailwindcss'),
   ],
 };
