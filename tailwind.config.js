@@ -11,6 +11,9 @@ module.exports = {
       screens: {
         '3xl': '2000px',
       },
+      fontFamily: {
+        'source-sans': ['Source Sans Pro', 'sans-serif'],
+      },
     },
   },
   plugins: [

@@ -26,12 +26,12 @@ const Header = () => {
       </div>
       <div>
         <Image
+          className="object-center object-contain"
           src={HuLuLogo}
           width={150}
           height={100}
           placeholder="blur"
           alt="Hulu Logo"
-          className="object-center"
         ></Image>
       </div>
     </header>

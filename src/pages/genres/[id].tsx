@@ -15,7 +15,7 @@ import {
 import Home from '../../components/Home/Home';
 import { addTopTrendTopRated, BASE_IMAGE_URL } from '../../utilities/helpers';
 import { getPlaiceholder } from 'plaiceholder';
-import EmptyImg from '../../../public/no-image-photo-template-gray-background-empty-photography-mockup-picture-available-thumbnail-placeholder-blank-sign-237351983.jpg';
+import EmptyImg from '../../../public/Hulu-Green-digital.png';
 
 type Props = {
   genres: TGenre[][];
@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: true, //*Look up in doc. blocking mean that only build these path first
+    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps<
             await Promise.all(
               eachCategory.map(async (movie) => {
                 if (!movie.poster_path && !movie.backdrop_path) {
-                  return { ...movie, imageProps: EmptyImg };
+                  return { ...movie, imageProps: { ...EmptyImg } };
                 }
                 const blurData = await getPlaiceholder(
                   movie.backdrop_path

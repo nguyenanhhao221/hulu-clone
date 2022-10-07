@@ -13,11 +13,11 @@ const MovieCard = ({ movie, index }: Props) => {
   const { category } = useContext(CategoryContextProvider);
   return (
     <Link href={`/watch/${category}/${movie.id}`}>
-      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105">
-        <div>
+      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105 ">
+        <div className="block object-contain">
           <Image
             {...movie.imageProps}
-            className="h-auto max-w-full object-contain"
+            className="overflow-hidden max-w-full max-h-[180px] object-contain object-center xl:max-h-[250px]"
             width={1920}
             height={1080}
             alt="thumbnail"

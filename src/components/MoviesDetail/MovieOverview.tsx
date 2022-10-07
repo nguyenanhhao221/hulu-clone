@@ -1,7 +1,7 @@
-import type { TMovie } from '../../../type';
 import UserScore from '../Utils/UserScore';
 import PlayTrailer from '../Utils/PlayTrailer';
 import { convertTime } from '../../utilities/helpers';
+import { TMovie } from '../../../type';
 
 type Props = { movie: TMovie };
 const MovieOverview = ({ movie }: Props) => {

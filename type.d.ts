@@ -46,6 +46,7 @@ export type TMovie = {
     vote_average?: number;
     vote_count?: number;
   };
+  episode_run_time?: number[];
   imageProps: ILoadImageImg & { blurDataURL?: string };
 };
 export type ILoadImageImg = {
