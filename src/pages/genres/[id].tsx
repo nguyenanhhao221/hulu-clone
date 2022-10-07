@@ -13,13 +13,13 @@ import {
   getUniqueGenres,
 } from '../../utilities/requests';
 import Home from '../../components/Home/Home';
-import { addTopTrendTopRated } from '../../utilities/helpers';
+import { addTopTrendTopRated, BASE_IMAGE_URL } from '../../utilities/helpers';
+import { getPlaiceholder } from 'plaiceholder';
 
 type Props = {
   genres: TGenre[][];
   movies: TMovie[][];
 };
-
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: false, //*Look up in doc. blocking mean that only build these path first
+    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -57,6 +57,27 @@ export const getStaticProps: GetStaticProps<
       } else {
         movies = await fetchByGenres(apiKey, params.id, categories);
       }
+    }
+    //Logic to add a blur place holder to each movie using PlaiceHolder
+    if (movies) {
+      movies = await Promise.all(
+        movies?.map(
+          async (eachCategory) =>
+            await Promise.all(
+              eachCategory.map(async (movie) => {
+                const blurData = await getPlaiceholder(
+                  movie.backdrop_path
+                    ? `${BASE_IMAGE_URL}${movie.backdrop_path}`
+                    : `${BASE_IMAGE_URL}${movie.poster_path}`
+                );
+                return {
+                  ...movie,
+                  imageProps: { ...blurData.img, blurDataURL: blurData.base64 },
+                };
+              })
+            )
+        )
+      );
     }
     return {
       props: {

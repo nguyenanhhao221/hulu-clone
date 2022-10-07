@@ -44,6 +44,13 @@ export type TMovie = {
     vote_average?: number;
     vote_count?: number;
   };
+  imageProps: ILoadImageImg & { blurDataURL: string };
+};
+export type ILoadImageImg = {
+  src: string;
+  height?: number | string;
+  width?: number | string;
+  type?: string;
 };
 export type TCategory = 'tv' | 'movie';
 export type TUserPropResult = {
@@ -58,7 +65,7 @@ export type TMoviePagePropResult = {
 };
 export type TImageProps = {
   blurDataURL: string;
-} & TImageProps;
+} & ILoadImageImg;
 
 type TImageReturn = {
   height: number;
