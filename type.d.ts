@@ -1,4 +1,4 @@
-import { StaticImageData } from 'next/future/image';
+import { StaticImageData } from "next/future/image";
 
 export interface TGenre {
   id: number | string; //string for special case only, in this case because we will use Top Trend and Top Rated
@@ -11,7 +11,7 @@ export type TDataResponseTMDB = {
   total_results?: number;
 };
 export type TMovie = {
-  poster_path?: string;
+  poster_path?: string | StaticImageData;
   adult?: boolean;
   overview?: string;
   release_date?: string;
@@ -20,7 +20,8 @@ export type TMovie = {
   original_title?: string;
   original_language?: string;
   title?: string;
-  backdrop_path?: string | null;
+  backdrop_path?: string | null | StaticImageData;
+  ƒ;
   popularity?: number;
   vote_count?: number;
   video?: boolean;
@@ -57,7 +58,7 @@ export type ILoadImageImg = {
   width?: number | string;
   type?: string;
 };
-export type TCategory = 'tv' | 'movie';
+export type TCategory = "tv" | "movie";
 export type TUserPropResult = {
   genres: TGenre[][];
   movies?: TMovie[][];
@@ -65,8 +66,8 @@ export type TUserPropResult = {
 
 export type TMoviePagePropResult = {
   movie: TMovie;
-  backdropImagesProps: TImageProps;
-  posterImagesProps: TImageProps;
+  backdropImagesProps: TImageProps | boolean;
+  posterImagesProps: TImageProps | boolean;
 };
 export type TImageProps = {
   blurDataURL: string;
@@ -81,5 +82,5 @@ type TImageReturn = {
 export type TFetchDetailParams = {
   apiKey: string;
   id: string;
-  category: 'movie' | 'tv';
+  category: "movie" | "tv";
 };
