@@ -6,6 +6,7 @@ type Props = {
 };
 const Title = ({ genres }: Props) => {
   const router = useRouter();
+  if (!genres) return <>Error</>;
   const [title] = genres.flat(1).filter((genre) => {
     //Because query is as string type and id genre is store as number
     return genre.id.toString() === router.query.id;
@@ -13,7 +14,7 @@ const Title = ({ genres }: Props) => {
 
   return (
     <h2 className="decoration-3 p-6 text-center text-3xl font-bold tracking-wide underline decoration-hulu-green underline-offset-8 md:text-left">
-      {title.name}
+      {title?.name}
     </h2>
   );
 };

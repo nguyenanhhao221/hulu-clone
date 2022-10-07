@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/future/image';
+
 export interface TGenre {
   id: number | string; //string for special case only, in this case because we will use Top Trend and Top Rated
   name: string;
@@ -44,10 +46,10 @@ export type TMovie = {
     vote_average?: number;
     vote_count?: number;
   };
-  imageProps: ILoadImageImg & { blurDataURL: string };
+  imageProps: ILoadImageImg & { blurDataURL?: string };
 };
 export type ILoadImageImg = {
-  src: string;
+  src: string | StaticImageData;
   height?: number | string;
   width?: number | string;
   type?: string;

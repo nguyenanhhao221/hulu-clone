@@ -15,6 +15,7 @@ import {
 import Home from '../../components/Home/Home';
 import { addTopTrendTopRated, BASE_IMAGE_URL } from '../../utilities/helpers';
 import { getPlaiceholder } from 'plaiceholder';
+import EmptyImg from '../../../public/no-image-photo-template-gray-background-empty-photography-mockup-picture-available-thumbnail-placeholder-blank-sign-237351983.jpg';
 
 type Props = {
   genres: TGenre[][];
@@ -31,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
+    fallback: true, //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -65,6 +66,9 @@ export const getStaticProps: GetStaticProps<
           async (eachCategory) =>
             await Promise.all(
               eachCategory.map(async (movie) => {
+                if (!movie.poster_path && !movie.backdrop_path) {
+                  return { ...movie, imageProps: EmptyImg };
+                }
                 const blurData = await getPlaiceholder(
                   movie.backdrop_path
                     ? `${BASE_IMAGE_URL}${movie.backdrop_path}`
@@ -79,6 +83,8 @@ export const getStaticProps: GetStaticProps<
         )
       );
     }
+    console.log(genres[0].length + genres[1].length);
+
     return {
       props: {
         genres: genres.map((genre) =>
@@ -94,6 +100,8 @@ export const getStaticProps: GetStaticProps<
     };
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
+
       throw new Error(error.message);
     } else {
       const err = error as Error;

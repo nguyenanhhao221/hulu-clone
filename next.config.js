@@ -14,7 +14,7 @@ const nextConfig = {
       {
         source: '/',
         destination: '/genres/popular',
-        permanent: false,
+        permanent: true,
       },
     ];
   },
