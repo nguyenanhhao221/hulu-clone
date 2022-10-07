@@ -1,38 +1,51 @@
 import Image from 'next/future/image';
-import { TImageProps } from '../../../type';
+import { TImageProps, TMovie } from '../../../type';
+import DesktopMovieOverview from './DesktopMovieOverView';
 type Props = {
   original_title?: string;
   poster_path?: string;
   backdrop_path?: string | null;
   backdropImagesProps: TImageProps;
   posterImagesProps: TImageProps;
+  movie: TMovie;
 };
 function BackdropPoster({
   original_title,
   backdropImagesProps,
   posterImagesProps,
+  movie,
 }: Props) {
   return (
-    <div className="relative">
-      <Image
-        {...backdropImagesProps}
-        alt={`Backdrop for ${original_title ? original_title : 'movie'}`}
-        className=" object-cover object-right-bottom w-full z-1 ]"
-        sizes="100vw"
-        placeholder="blur"
-        height={100}
-        width={100}
-        quality={100}
-      ></Image>
-      <div className="w-full h-1/2 absolute inset-y-4 xl:inset-y-28">
+    <div className="relative max-h-[60vh] overflow-hidden w-full md:max-h-[90vh] 2xl:max-h-[100vh] ">
+      <div className="absolute z-0 w-full h-full ">
         <Image
-          {...posterImagesProps}
-          alt={`Poster for ${original_title ? original_title : 'movie'}`}
-          sizes={'33vw'}
-          quality={100}
+          // {...backdropImagesProps}
+          alt={`Backdrop for ${original_title ? original_title : 'movie'}`}
+          className="object-right object-cover z-0"
+          src={backdropImagesProps.src}
+          sizes="100vw"
           placeholder="blur"
-          className="object-contain z-10 w-[30%] min-h-min ml-12 shadow-2xl shadow-neutral-800"
+          blurDataURL={backdropImagesProps.blurDataURL}
+          quality={100}
+          fill
         ></Image>
+      </div>
+      <div className="lg:px-10 lg:py-20 lg:gap-5 xl:gap-10 relative justify-evenly max-h-[80%] grid grid-cols-[30%_70%] place-items-center bg-gradient-to-br from-black 2xl:max-h-[100%] 2xl:h-[80vh]">
+        <div className="w-full flex justify-end">
+          <Image
+            src={posterImagesProps.src}
+            width={300}
+            height={500}
+            blurDataURL={posterImagesProps.blurDataURL}
+            alt={`Poster for ${original_title ? original_title : 'movie'}`}
+            sizes={'33vw'}
+            quality={100}
+            placeholder="blur"
+            className="object-contain object-center z-[1] 
+              shadow-2xl h-full shadow-neutral-800"
+          ></Image>
+        </div>
+        <DesktopMovieOverview movie={movie}></DesktopMovieOverview>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
 import HuLuLogo from '../../../public/Hulu-Green-digital.png';
 const Header = () => {
   return (
-    <header className="flex h-auto flex-col items-center justify-between p-4 sm:flex-row">
+    <header className="flex h-auto flex-col items-center justify-between p-4 sm:flex-row 2xl:justify-around">
       <div className="flex max-w-2xl flex-grow justify-evenly">
         <HeaderItem url={'/'} title="HOME" Icon={HomeIcon}></HeaderItem>
         <HeaderItem

@@ -1,5 +1,6 @@
 import type { TImageProps, TMovie } from '../../../type';
 import BackdropPoster from './BackdropPoster';
+import DesktopMovieOverview from './DesktopMovieOverView';
 // import CastOverview from './CastOverView';
 import MovieOverview from './MovieOverview';
 //TODO fix type of imageProps
@@ -21,8 +22,12 @@ const MoviesDetail = ({
         backdrop_path={movie.backdrop_path}
         backdropImagesProps={backdropImagesProps}
         posterImagesProps={posterImagesProps}
+        movie={movie}
       />
-      <MovieOverview movie={movie}></MovieOverview>
+      <div className="lg:hidden">
+        <MovieOverview movie={movie} />
+      </div>
+
       {/* <CastOverview></CastOverview> */}
     </main>
   );
