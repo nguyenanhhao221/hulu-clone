@@ -6,11 +6,11 @@ import RunTime from './RunTime';
 type Props = { movie: TMovie };
 const DesktopMovieOverview = ({ movie }: Props) => {
   return (
-    <section className="Movie Detail z-[20] py-2 hidden lg:block w-3/4 self-center">
+    <section className="Movie Detail z-20 hidden w-3/4 place-self-start self-center lg:block">
       <div className="space-y-4">
-        <h2 className="font-bold text-2xl ">
+        <h2 className="text-2xl font-bold ">
           {movie.original_title || movie.original_name}{' '}
-          <time className=" text-sm text-gray-300 font-light">{`(${
+          <time className=" text-sm font-light text-gray-300">{`(${
             movie.release_date?.substring(0, 4) ||
             movie.first_air_date?.substring(0, 4)
           })`}</time>
@@ -42,7 +42,7 @@ const DesktopMovieOverview = ({ movie }: Props) => {
         <div className="description">
           <p className="italic text-gray-400">{movie.tagline}</p>
           <h3 className="text-lg font-semibold leading-10">Overview</h3>
-          <p className="tracking-wide font-light">{movie.overview}</p>
+          <p className="font-light tracking-wide">{movie.overview}</p>
         </div>
         <div className="writer"></div>
         <p>{`Visit homepage: ${movie.homepage}`}</p>

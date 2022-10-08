@@ -1,7 +1,7 @@
-import type { TImageProps, TMovie } from "../../../type";
-import BackdropPoster from "./BackdropPoster";
+import type { TImageProps, TMovie } from '../../../type';
+import BackdropPoster from './BackdropPoster';
 // import CastOverview from './CastOverView';
-import MovieOverview from "./MovieOverview";
+import MovieOverview from './MovieOverview';
 //TODO fix type of imageProps
 type Props = {
   movie: TMovie;
