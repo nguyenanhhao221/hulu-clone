@@ -24,9 +24,9 @@ const Header = () => {
         <HeaderItem title="COLLECTION" Icon={RectangleStackIcon}></HeaderItem>
         <HeaderItem title="USER" Icon={UserIcon}></HeaderItem>
       </div>
-      <div>
+      <div className="self-center sm:self-start">
         <Image
-          className="object-center object-contain"
+          className="object-contain object-center"
           src={HuLuLogo}
           width={150}
           height={100}

@@ -1,8 +1,8 @@
-import Image from "next/future/image";
-import { TImageProps, TMovie } from "../../../type";
-import DesktopMovieOverview from "./DesktopMovieOverview";
-import EmptyBackdrop from "../../../public/hulu-empty-backdrop.jpg";
-import EmptyPoster from "../../../public/no-image-icon-23483.jpg";
+import Image from 'next/future/image';
+import { TImageProps, TMovie } from '../../../type';
+import DesktopMovieOverview from './DesktopMovieOverview';
+import EmptyBackdrop from '../../../public/hulu-empty-backdrop.jpg';
+import EmptyPoster from '../../../public/no-image-icon-23483.jpg';
 type Props = {
   original_title?: string;
   backdropImagesProps: TImageProps;
