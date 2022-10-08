@@ -2,7 +2,7 @@ import React from 'react';
 
 const NoContent = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-[80vh] gap-4">
+    <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
       <h2 className="text-center text-3xl font-extrabold">
         No Content Available!
       </h2>

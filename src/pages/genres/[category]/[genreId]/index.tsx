@@ -4,32 +4,50 @@ import {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import type { TCategory, TGenre, TMovie, TUserPropResult } from '../../../type';
+import type {
+  TCategory,
+  TGenre,
+  TMovie,
+  TUserPropResult,
+} from '../../../../../type';
 import {
   fetchAllGenres,
   fetchByGenres,
   fetchPopular,
   fetchTopRated,
   getUniqueGenres,
-} from '../../utilities/requests';
-import Home from '../../components/Home/Home';
-import { addTopTrendTopRated, BASE_IMAGE_URL } from '../../utilities/helpers';
+} from '../../../../utilities/requests';
+import Home from '../../../../components/Home/Home';
+import {
+  addTopTrendTopRated,
+  BASE_IMAGE_URL,
+} from '../../../../utilities/helpers';
 import { getPlaiceholder } from 'plaiceholder';
-import EmptyImg from '../../../public/Hulu-Green-digital.png';
+import EmptyImg from '../../../../../public/Hulu-Green-digital.png';
 
 type Props = {
   genres: TGenre[][];
   movies: TMovie[][];
 };
+
+//!THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
+const categories: TCategory[] = ['movie', 'tv'];
+
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
     throw new Error('apiKey does not exist in ENV');
   const allGenres = await getUniqueGenres(apiKey, categories);
-  const paths = allGenres.map((genre) => ({
-    params: { id: genre.id.toString() },
-  }));
+  //Our routes will be in the format /[category]/[id]
+  const pathArr = categories.map((category) => {
+    return allGenres.map((genre) => ({
+      params: { category: category, genreId: genre.id.toString() },
+    }));
+  });
+
+  const paths = pathArr.flat(1);
+
   return {
     paths,
     fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
@@ -41,7 +59,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 //Revalidate options will make this page rebuild every 10 seconds.
 export const getStaticProps: GetStaticProps<
   TUserPropResult,
-  { id: string }
+  { genreId: string }
 > = async ({ params }): Promise<GetStaticPropsResult<TUserPropResult>> => {
   const apiKey = process.env.API_KEY;
   if (typeof apiKey === 'undefined')
@@ -51,12 +69,12 @@ export const getStaticProps: GetStaticProps<
     const genres = await fetchAllGenres(apiKey, categories);
     let movies: TMovie[][] | undefined;
     if (typeof params !== 'undefined') {
-      if (params.id === 'top-rated') {
+      if (params.genreId === 'top-rated') {
         movies = await fetchTopRated(apiKey, categories);
-      } else if (params.id === 'popular') {
+      } else if (params.genreId === 'popular') {
         movies = await fetchPopular(apiKey, categories);
       } else {
-        movies = await fetchByGenres(apiKey, params.id, categories);
+        movies = await fetchByGenres(apiKey, params.genreId, categories);
       }
     }
     //Logic to add a blur place holder to each movie using PlaiceHolder
@@ -83,7 +101,6 @@ export const getStaticProps: GetStaticProps<
         )
       );
     }
-    console.log(genres[0].length + genres[1].length);
 
     return {
       props: {
@@ -109,9 +126,6 @@ export const getStaticProps: GetStaticProps<
     }
   }
 };
-
-//!THIS WILL BE USED TO QUERY MOVIE AND TV TO TMDB
-const categories: TCategory[] = ['movie', 'tv'];
 
 const HomePage: NextPage<Props> = ({ genres, movies }: Props) => {
   return (
