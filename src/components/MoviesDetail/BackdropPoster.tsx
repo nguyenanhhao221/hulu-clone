@@ -1,6 +1,6 @@
 import Image from 'next/future/image';
 import { TImageProps, TMovie } from '../../../type';
-import DesktopMovieOverview from './DesktopMovieOverview';
+import DesktopMovieOverview from './MovieOverview';
 import EmptyBackdrop from '../../../public/hulu-empty-backdrop.jpg';
 import EmptyPoster from '../../../public/no-image-icon-23483.jpg';
 type Props = {
@@ -50,7 +50,9 @@ function BackdropPoster({
           ></Image>
         </div>
         {/* Overview for when not in mobile view */}
-        <DesktopMovieOverview movie={movie}></DesktopMovieOverview>
+        <div className="hidden lg:block">
+          <DesktopMovieOverview movie={movie}></DesktopMovieOverview>
+        </div>
       </div>
     </div>
   );
