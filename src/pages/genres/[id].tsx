@@ -13,13 +13,14 @@ import {
   getUniqueGenres,
 } from '../../utilities/requests';
 import Home from '../../components/Home/Home';
-import { addTopTrendTopRated } from '../../utilities/helpers';
+import { addTopTrendTopRated, BASE_IMAGE_URL } from '../../utilities/helpers';
+import { getPlaiceholder } from 'plaiceholder';
+import EmptyImg from '../../../public/Hulu-Green-digital.png';
 
 type Props = {
   genres: TGenre[][];
   movies: TMovie[][];
 };
-
 //Because the path is generated dynamic base on external database, we will use getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const apiKey = process.env.API_KEY;
@@ -31,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
   return {
     paths,
-    fallback: false, //*Look up in doc. blocking mean that only build these path first
+    fallback: 'blocking', //*Look up in doc. blocking mean that only build these path first
   };
 };
 
@@ -58,6 +59,32 @@ export const getStaticProps: GetStaticProps<
         movies = await fetchByGenres(apiKey, params.id, categories);
       }
     }
+    //Logic to add a blur place holder to each movie using PlaiceHolder
+    if (movies) {
+      movies = await Promise.all(
+        movies?.map(
+          async (eachCategory) =>
+            await Promise.all(
+              eachCategory.map(async (movie) => {
+                if (!movie.poster_path && !movie.backdrop_path) {
+                  return { ...movie, imageProps: { ...EmptyImg } };
+                }
+                const blurData = await getPlaiceholder(
+                  movie.backdrop_path
+                    ? `${BASE_IMAGE_URL}${movie.backdrop_path}`
+                    : `${BASE_IMAGE_URL}${movie.poster_path}`
+                );
+                return {
+                  ...movie,
+                  imageProps: { ...blurData.img, blurDataURL: blurData.base64 },
+                };
+              })
+            )
+        )
+      );
+    }
+    console.log(genres[0].length + genres[1].length);
+
     return {
       props: {
         genres: genres.map((genre) =>
@@ -73,6 +100,8 @@ export const getStaticProps: GetStaticProps<
     };
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error);
+
       throw new Error(error.message);
     } else {
       const err = error as Error;

@@ -3,9 +3,7 @@ import Image from 'next/future/image';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { TMovie } from '../../../type';
-import { BASE_IMAGE_URL } from '../../utilities/helpers';
 import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
-
 type Props = {
   movie: TMovie;
   index: number;
@@ -15,24 +13,19 @@ const MovieCard = ({ movie, index }: Props) => {
   const { category } = useContext(CategoryContextProvider);
   return (
     <Link href={`/watch/${category}/${movie.id}`}>
-      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105">
-        <Image
-          className="h-auto max-w-full object-contain"
-          width={1920}
-          height={1080}
-          alt="thumbnail"
-          placeholder="blur"
-          sizes="100vw (min-width 640px) 50vw (min-width 768px) 33vw (min-width 1024px) 25vw "
-          priority={index <= 7 ? true : undefined} //We load the first 6 image with priority to give better UX
-          blurDataURL={
-            `${BASE_IMAGE_URL}${movie.backdrop_path || movie.poster_path}` ||
-            `${BASE_IMAGE_URL}${movie.poster_path}`
-          }
-          src={
-            `${BASE_IMAGE_URL}${movie.backdrop_path || movie.poster_path}` ||
-            `${BASE_IMAGE_URL}${movie.poster_path}`
-          }
-        ></Image>
+      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105 ">
+        <div className="block object-contain">
+          <Image
+            {...movie.imageProps}
+            className="overflow-hidden max-w-full max-h-[180px] object-contain object-center xl:max-h-[250px]"
+            width={1920}
+            height={1080}
+            alt="thumbnail"
+            placeholder={'blur'}
+            sizes="100vw (min-width 640px) 50vw (min-width 768px) 33vw (min-width 1024px) 25vw "
+            priority={index <= 7 ? true : undefined} //We load the first 6 image with priority to give better UX
+          ></Image>
+        </div>
         <div className="space-y-1">
           <p className="line-clamp-2 ">{movie.overview}</p>
           <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out md:motion-safe:group-hover:font-extrabold">

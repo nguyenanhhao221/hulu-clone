@@ -9,7 +9,7 @@ type Props = {
 const Navbar = ({ genres }: Props) => {
   //We base the Navbar depends on the category, anytime this category changes, Navbar will need to update to match all the genres available in that category.
   const { category } = useContext(CategoryContextProvider);
-
+  if (!genres) return <span>Genres Not Available</span>;
   let genre: TGenre[] = genres[0];
   if (category === 'tv') {
     genre = genres[1];
@@ -17,7 +17,7 @@ const Navbar = ({ genres }: Props) => {
   return (
     <nav className="relative">
       <ul className="flex space-x-10 overflow-x-scroll whitespace-nowrap px-4 scrollbar-hide sm:space-x-20 ">
-        {genre.map(({ name, id }) => (
+        {genre?.map(({ name, id }) => (
           <li
             key={id}
             className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white last:pr-24 active:text-red-500"

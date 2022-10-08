@@ -11,11 +11,15 @@ module.exports = {
       screens: {
         '3xl': '2000px',
       },
+      fontFamily: {
+        'source-sans': ['Source Sans Pro', 'sans-serif'],
+      },
     },
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('daisyui'),
     require('@tailwindcss/line-clamp'),
+    require('prettier-plugin-tailwindcss'),
   ],
 };
