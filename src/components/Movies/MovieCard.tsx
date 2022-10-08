@@ -9,15 +9,14 @@ type Props = {
   index: number;
 };
 const MovieCard = ({ movie, index }: Props) => {
-  // *This is to get the image from TMDB. Read more :https://developers.themoviedb.org/3/getting-started/images
   const { category } = useContext(CategoryContextProvider);
   return (
     <Link href={`/watch/${category}/${movie.id}`}>
-      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden duration-300 ease-in-out  transition-all motion-safe:hover:scale-105 ">
+      <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden transition-all duration-300  ease-in-out motion-safe:hover:scale-105 ">
         <div className="block object-contain">
           <Image
             {...movie.imageProps}
-            className="overflow-hidden max-w-full max-h-[180px] object-contain object-center xl:max-h-[250px]"
+            className="max-h-[180px] max-w-full overflow-hidden object-contain object-center xl:max-h-[250px]"
             width={1920}
             height={1080}
             alt="thumbnail"

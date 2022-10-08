@@ -20,9 +20,9 @@ const Navbar = ({ genres }: Props) => {
         {genre?.map(({ name, id }) => (
           <li
             key={id}
-            className="cursor-pointer text-gray-200 transition hover:scale-125 hover:text-white last:pr-24 active:text-red-500"
+            className="cursor-pointer text-gray-200 transition last:pr-24 hover:scale-125 hover:text-white active:text-red-500"
           >
-            <Link href={`/genres/${id}`}>{name}</Link>
+            <Link href={`/genres/${category}/${id}`}>{name}</Link>
           </li>
         ))}
       </ul>

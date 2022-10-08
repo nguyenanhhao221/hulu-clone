@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { TMovie } from '../../../type';
-import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 import NoContent from '../ErrorDisplay/NoContent';
 import TabList from '../Utils/TabList';
 import MovieCard from './MovieCard';
@@ -9,7 +9,8 @@ type Props = {
 };
 const Movies = ({ movies }: Props) => {
   const [currentTab, setCurrentTab] = useState<string>('movie');
-  const { category } = useContext(CategoryContextProvider);
+  const router = useRouter();
+  const { category } = router.query;
   if (!movies) return <div>Service Problems</div>;
   let cardToRender: TMovie[] = movies[0];
   if (category === 'tv') {

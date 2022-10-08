@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { TCategory } from '../../../type';
 import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
@@ -23,16 +24,20 @@ function TabList({ currentTab, setCurrentTab }: Props) {
       category: 'TV',
     },
   ];
+  const router = useRouter();
+  const { category: categoryQuery, genreId: genreIdQuery } = router.query;
+  console.log('🚀 ~ TabList ~ genreIdQuery', genreIdQuery);
+  console.log('🚀 ~ TabList ~ categoryQuery', categoryQuery);
   return (
     <div className="text-center ">
       <div
         role="tablist"
-        className="tabs border inline-block rounded-xl tabs-boxed bg-hulu-main border-hulu-green"
+        className="tabs tabs-boxed inline-block rounded-xl border border-hulu-green bg-hulu-main"
       >
         {categoriesButtons.map((category) => (
           <button
             role="tab"
-            className={`tab-md text-white tab tab-lifted ${
+            className={`tab tab-lifted tab-md text-white ${
               currentTab === category.id ? 'tab-active ' : ''
             }`}
             type="button"
@@ -40,6 +45,10 @@ function TabList({ currentTab, setCurrentTab }: Props) {
             onClick={() => {
               setCurrentTab(category.id);
               setCategory(category.id);
+              //router.push(url, as, options)
+              router.push(`/genres/${category.id}/${genreIdQuery}`, undefined, {
+                shallow: true, //don't refresh the page, just replace the URL
+              });
             }}
           >
             <span className="capitalize">{category.category}</span>
