@@ -1,14 +1,13 @@
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { TGenre } from '../../../type';
-import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 
 type Props = {
     genres: TGenre[][];
 };
 const Navbar = ({ genres }: Props) => {
-    //We base the Navbar depends on the category, anytime this category changes, Navbar will need to update to match all the genres available in that category.
-    const { category } = useContext(CategoryContextProvider);
+    const router = useRouter();
+    const { category } = router.query;
     if (!genres) return <span>Genres Not Available</span>;
     let genre: TGenre[] = genres[0];
     if (category === 'tv') {
