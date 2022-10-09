@@ -1,22 +1,29 @@
 import { HandThumbUpIcon } from '@heroicons/react/24/outline';
 import Image from 'next/future/image';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { TMovie } from '../../../type';
-import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
 type Props = {
     movie: TMovie;
     index: number;
 };
 const MovieCard = ({ movie, index }: Props) => {
-    const { category } = useContext(CategoryContextProvider);
+    const { category } = useRouter().query;
     return (
         <Link href={`/watch/${category}/${movie.id}`}>
-            <div className="group z-50 max-w-md cursor-pointer space-y-2 overflow-hidden transition-all duration-300  ease-in-out motion-safe:hover:scale-105 ">
-                <div className="block object-contain">
+            <div className="group flex max-w-md cursor-pointer flex-col gap-2 overflow-hidden transition-all duration-300 ease-in-out motion-safe:hover:scale-105">
+                <div
+                    className={`relative overflow-hidden object-center ${
+                        !movie.backdrop_path
+                            ? `max-h-[180px] lg:max-h-[250px]`
+                            : ``
+                    } `}
+                >
                     <Image
                         {...movie.imageProps}
-                        className="max-h-[180px] max-w-full overflow-hidden object-contain object-center xl:max-h-[250px]"
+                        className={`h-full w-full object-contain   ${
+                            !movie.backdrop_path ? `h-full ` : ``
+                        }  `}
                         width={1920}
                         height={1080}
                         alt="thumbnail"

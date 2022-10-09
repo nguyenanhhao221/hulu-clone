@@ -110,7 +110,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
             </Head>
-            <Header></Header>
+            <Header />
             <Component {...pageProps} />
         </>
     );
