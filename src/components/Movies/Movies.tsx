@@ -8,9 +8,9 @@ type Props = {
     movies?: TMovie[][];
 };
 const Movies = ({ movies }: Props) => {
-    const [currentTab, setCurrentTab] = useState<string>('movie');
     const router = useRouter();
     const { category } = router.query;
+    const [currentTab, setCurrentTab] = useState(category);
     if (!movies) return <div>Service Problems</div>;
     let cardToRender: TMovie[] = movies[0];
     if (category === 'tv') {
