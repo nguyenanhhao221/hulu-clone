@@ -9,7 +9,7 @@ const Title = ({ genres }: Props) => {
     if (!genres) return <>Error</>;
     const [title] = genres.flat(1).filter((genre) => {
         //Because query is as string type and id genre is store as number
-        return genre.id.toString() === router.query.id;
+        return genre.id.toString() === router.query.genreId;
     });
 
     return (
