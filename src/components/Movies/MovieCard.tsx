@@ -28,9 +28,10 @@ const MovieCard = ({ movie, index }: Props) => {
                 <div className="space-y-1">
                     <p className="line-clamp-2 ">{movie.overview}</p>
                     <h2 className="font-serif text-2xl tracking-wide transition-all duration-500 ease-in-out md:motion-safe:group-hover:font-extrabold">
-                        {movie.original_language === 'en'
-                            ? movie.original_title || movie.name
-                            : movie.title || movie.original_name}
+                        {movie.name ||
+                            movie.title ||
+                            movie.original_name ||
+                            movie.original_name}
                     </h2>
                     <p className="flex items-center justify-between">
                         {movie.release_date ? (
