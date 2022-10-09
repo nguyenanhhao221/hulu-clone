@@ -4,9 +4,11 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'hulu-main': '#06202A',
-                'hulu-sub': '#183949',
+                'hulu-main': '#183949',
                 'hulu-green': '#1ce783',
+                'hulu-gradient-from': '#040405',
+                'hulu-gradient-to': '#183949',
+                'hulu-black': '#040405',
             },
             screens: {
                 '3xl': '2000px',

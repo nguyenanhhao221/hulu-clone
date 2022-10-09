@@ -32,12 +32,12 @@ function TabList({ currentTab, setCurrentTab }: Props) {
         <div className="text-center ">
             <div
                 role="tablist"
-                className="tabs tabs-boxed inline-block rounded-xl border border-hulu-green bg-hulu-main"
+                className="tabs tabs-boxed inline-block rounded-xl border border-hulu-green bg-hulu-gradient-to"
             >
                 {categoriesButtons.map((eachCategory) => (
                     <button
                         role="tab"
-                        className={`tab tab-lifted tab-md text-white ${
+                        className={`tab tab-lifted tab-md border-none border-transparent bg-transparent text-white ${
                             currentTab === eachCategory.id ? 'tab-active ' : ''
                         }`}
                         type="button"
