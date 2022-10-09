@@ -13,8 +13,8 @@ const nextConfig = {
         return [
             {
                 source: '/',
-                destination: '/genres/popular',
-                permanent: true,
+                destination: '/genres/movie/popular',
+                permanent: false,
             },
         ];
     },
