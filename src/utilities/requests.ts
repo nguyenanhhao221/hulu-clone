@@ -132,7 +132,7 @@ export const fetchMovieById = async ({
             movie_id: id,
             tv_id: id,
             // get additional result without make additional request
-            append_to_response: 'videos,content_ratings,release_dates',
+            append_to_response: 'videos,content_ratings,release_dates,credits',
         },
     };
     try {

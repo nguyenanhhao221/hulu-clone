@@ -40,7 +40,7 @@ const MovieOverview = ({ movie }: Props) => {
                         episode_run_time={movie.episode_run_time}
                         next_episode_to_air={movie.next_episode_to_air}
                     />
-                    <div className="flex flex-grow flex-col-reverse items-center gap-3 lg:flex-row lg:gap-1">
+                    <div className="flex flex-grow flex-col items-center gap-3 lg:flex-row lg:gap-1">
                         {!content_ratings && !release_dates ? (
                             ``
                         ) : (
@@ -67,7 +67,10 @@ const MovieOverview = ({ movie }: Props) => {
                     </h3>
                     <p className="font-light tracking-wide">{movie.overview}</p>
                 </div>
-                <Writers created_by={movie.created_by} />
+                <Writers
+                    created_by={movie.created_by}
+                    crew={movie.credits?.crew}
+                />
                 <p>{`Visit homepage: ${movie.homepage}`}</p>
             </div>
         </section>

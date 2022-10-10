@@ -39,7 +39,29 @@ export type TMovie = {
     created_by?: IWritersTV[];
     content_ratings?: TAgeRating;
     release_dates?: TAgeRating;
+    credits?: {
+        cast?: TCast[];
+        crew?: TCrew[];
+    };
 };
+type TCast = {
+    adult?: boolean;
+    gender?: number | null;
+    id?: number;
+    known_for_department?: string;
+    name?: string;
+    original_name?: string;
+    popularity?: number;
+    profile_path?: string | null;
+    cast_id?: number;
+    character?: string;
+    credit_id?: string;
+    order?: number;
+};
+export type TCrew = {
+    department?: string;
+    job?: string;
+} & TCast;
 type TAgeRating = {
     results?: {
         iso_3166_1?: string;
@@ -59,6 +81,7 @@ interface IWritersTV {
     name?: string;
     gender?: number;
     profile_path?: string | null;
+    job?: string;
 }
 export type EpisodeToAir = {
     air_date?: string;
