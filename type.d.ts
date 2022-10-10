@@ -37,8 +37,22 @@ export type TMovie = {
     episode_run_time?: number[];
     imageProps: ILoadImageImg & { blurDataURL?: string };
     created_by?: IWritersTV[];
+    content_ratings?: TAgeRating;
+    release_dates?: TAgeRating;
 };
-
+type TAgeRating = {
+    results?: {
+        iso_3166_1?: string;
+        rating?: string;
+        release_dates?: {
+            certification?: string;
+            iso_639_1?: string;
+            note?: string;
+            release_date?: string;
+            type?: number;
+        }[];
+    }[];
+};
 interface IWritersTV {
     id?: number;
     credit_id?: string;

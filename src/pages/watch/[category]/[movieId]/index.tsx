@@ -46,7 +46,10 @@ export const getServerSideProps: GetServerSideProps<
                 id: context.params.movieId,
                 category: context.params.category,
             };
-            const response = await fetchMovieById(paramsFetchDetail);
+            const response = await fetchMovieById(paramsFetchDetail); //Fetch the movie or tv show base on ID and category
+            //Base on the response, make additional call to get Social Media. Movie will have different endpoints compare with TV
+
+            // Getting the blur effect to each image via getPlaiceHolder
             const { backdrop_path, poster_path } = response;
             const backdropImageProps = backdrop_path
                 ? await getPlaiceholder(`${BASE_IMAGE_URL}${backdrop_path}`)

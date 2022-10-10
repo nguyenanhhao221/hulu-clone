@@ -119,25 +119,27 @@ export const fetchByGenres = async (
     );
     return resultArr;
 };
-
+//Fetch base on ID
 export const fetchMovieById = async ({
     apiKey,
     id,
     category,
 }: TFetchDetailParams) => {
-    const baseURL = `https://api.themoviedb.org/3/${category}`;
-    const url = `/${id}`;
+    const endpoint = `/${category}/${id}`;
     const options: AxiosRequestConfig = {
         params: {
             api_key: apiKey,
-            language: 'en-us',
             movie_id: id,
             tv_id: id,
+            // get additional result without make additional request
+            append_to_response: 'videos,content_ratings,release_dates',
         },
-        baseURL,
     };
     try {
-        const response: AxiosResponse<TMovie> = await axios(url, options);
+        const response: AxiosResponse<TMovie> = await axiosTMDB(
+            endpoint,
+            options
+        );
         return response.data;
     } catch (error) {
         if (error instanceof Error) {

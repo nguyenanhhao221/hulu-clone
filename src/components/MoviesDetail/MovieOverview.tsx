@@ -5,7 +5,18 @@ import RunTime from './RunTime';
 import Writers from './Writers';
 
 type Props = { movie: TMovie };
-const DesktopMovieOverview = ({ movie }: Props) => {
+const MovieOverview = ({ movie }: Props) => {
+    //Get the ageRating base on TV or Movie.
+    const { release_dates, content_ratings } = movie;
+    let ageRating: string | undefined = 'Unknown';
+    if (release_dates) {
+        ageRating = release_dates.results
+            ?.find((release) => release.iso_3166_1?.toLowerCase() === 'us')
+            ?.release_dates?.at(0)?.certification;
+    }
+    if (content_ratings) {
+        ageRating = content_ratings.results?.at(0)?.rating;
+    }
     return (
         <section className="Movie Detail z-20 place-self-start self-center py-4 lg:w-3/4">
             <div className="space-y-4 px-4">
@@ -29,16 +40,25 @@ const DesktopMovieOverview = ({ movie }: Props) => {
                         episode_run_time={movie.episode_run_time}
                         next_episode_to_air={movie.next_episode_to_air}
                     />
-                    <ul className="flex flex-wrap items-center justify-center text-center md:flex-row lg:w-full lg:justify-start">
-                        {movie.genres?.map((genre, index, genreArr) => (
-                            //Add "," to each element except the last
-                            <li className="px-1" key={genre.id}>
-                                {index === genreArr.length - 1
-                                    ? `${genre.name}`
-                                    : `${genre.name}, `}
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="flex flex-grow flex-col-reverse items-center gap-3 lg:flex-row lg:gap-1">
+                        {!content_ratings && !release_dates ? (
+                            ``
+                        ) : (
+                            <p className="text-grey-300 whitespace-nowrap border px-1 opacity-60">
+                                {ageRating}
+                            </p>
+                        )}
+                        <ul className="flex flex-wrap items-center justify-center text-center md:flex-row lg:w-full lg:justify-start">
+                            {movie.genres?.map((genre, index, genreArr) => (
+                                //Add "," to each element except the last
+                                <li className="px-1" key={genre.id}>
+                                    {index === genreArr.length - 1
+                                        ? `${genre.name}`
+                                        : `${genre.name}, `}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
                 <div className="description">
                     <p className="italic text-gray-400">{movie.tagline}</p>
@@ -53,4 +73,4 @@ const DesktopMovieOverview = ({ movie }: Props) => {
         </section>
     );
 };
-export default DesktopMovieOverview;
+export default MovieOverview;

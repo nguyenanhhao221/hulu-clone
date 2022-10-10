@@ -1,8 +1,8 @@
 import type { TImageProps, TMovie } from '../../../type';
 import BackdropPoster from './BackdropPoster';
-import DesktopMovieOverview from './MovieOverview';
+import MovieOverview from './MovieOverview';
 // import CastOverview from './CastOverView';
-//TODO fix type of imageProps
+
 type Props = {
     movie: TMovie;
     backdropImagesProps: TImageProps;
@@ -22,7 +22,7 @@ const MoviesDetail = ({
                 movie={movie}
             />
             <div className="lg:hidden">
-                <DesktopMovieOverview movie={movie} />
+                <MovieOverview movie={movie} />
             </div>
 
             {/* <CastOverview></CastOverview> */}
