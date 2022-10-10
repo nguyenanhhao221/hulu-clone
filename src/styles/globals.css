@@ -4,16 +4,20 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply font-source-sans;
-  }
-  body {
-    @apply bg-hulu-main text-gray-300;
-  }
+    html {
+        @apply font-source-sans;
+    }
+    body {
+        @apply bg-gradient-to-r from-hulu-gradient-from to-hulu-gradient-to text-gray-300;
+    }
 }
 
 @layer components {
-  .tab-lifted.tab-active {
-    @apply bg-hulu-green text-zinc-900;
-  }
+    .tab-lifted.tab-active {
+        @apply bg-hulu-green text-zinc-900;
+    }
+    .tab-lifted.tab-active::after,
+    .tab-lifted.tab-active::before {
+        background-image: none;
+    }
 }

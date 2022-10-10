@@ -1,32 +1,42 @@
-import type { TImageProps, TMovie } from "../../../type";
-import BackdropPoster from "./BackdropPoster";
-// import CastOverview from './CastOverView';
-import MovieOverview from "./MovieOverview";
-//TODO fix type of imageProps
+import type { TImageProps, TMovie } from '../../../type';
+import BackdropPoster from './BackdropPoster';
+import MovieOverview from './MovieOverview';
+import CastOverview from './CastOverview';
+import { useRouter } from 'next/router';
+
 type Props = {
-  movie: TMovie;
-  backdropImagesProps: TImageProps;
-  posterImagesProps: TImageProps;
+    movie: TMovie;
+    backdropImagesProps: TImageProps;
+    posterImagesProps: TImageProps;
 };
 const MoviesDetail = ({
-  movie,
-  backdropImagesProps,
-  posterImagesProps,
+    movie,
+    backdropImagesProps,
+    posterImagesProps,
 }: Props) => {
-  return (
-    <main>
-      <BackdropPoster
-        original_title={movie.original_title}
-        backdropImagesProps={backdropImagesProps}
-        posterImagesProps={posterImagesProps}
-        movie={movie}
-      />
-      <div className="lg:hidden">
-        <MovieOverview movie={movie} />
-      </div>
+    const router = useRouter();
+    const { category } = router.query;
 
-      {/* <CastOverview></CastOverview> */}
-    </main>
-  );
+    return (
+        <main>
+            <BackdropPoster
+                original_title={movie.original_title}
+                backdropImagesProps={backdropImagesProps}
+                posterImagesProps={posterImagesProps}
+                movie={movie}
+            />
+            <div className="lg:hidden">
+                <MovieOverview movie={movie} />
+            </div>
+
+            <CastOverview
+                cast={
+                    category === 'movie'
+                        ? movie.credits?.cast
+                        : movie.aggregate_credits?.cast
+                }
+            ></CastOverview>
+        </main>
+    );
 };
 export default MoviesDetail;
