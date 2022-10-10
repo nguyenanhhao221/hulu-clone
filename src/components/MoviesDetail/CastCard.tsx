@@ -3,7 +3,6 @@ import React from 'react';
 import { TCast } from '../../../type';
 
 import { BASE_IMAGE_URL } from '../../utilities/helpers';
-import MovieCard from '../Movies/MovieCard';
 type Props = { topCastMember: TCast };
 
 const CastCard = ({ topCastMember }: Props) => {
