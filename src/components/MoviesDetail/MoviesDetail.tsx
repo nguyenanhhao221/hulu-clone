@@ -1,7 +1,8 @@
 import type { TImageProps, TMovie } from '../../../type';
 import BackdropPoster from './BackdropPoster';
 import MovieOverview from './MovieOverview';
-// import CastOverview from './CastOverView';
+import CastOverview from './CastOverview';
+import { useRouter } from 'next/router';
 
 type Props = {
     movie: TMovie;
@@ -13,6 +14,9 @@ const MoviesDetail = ({
     backdropImagesProps,
     posterImagesProps,
 }: Props) => {
+    const router = useRouter();
+    const { category } = router.query;
+
     return (
         <main>
             <BackdropPoster
@@ -25,7 +29,13 @@ const MoviesDetail = ({
                 <MovieOverview movie={movie} />
             </div>
 
-            {/* <CastOverview></CastOverview> */}
+            <CastOverview
+                cast={
+                    category === 'movie'
+                        ? movie.credits?.cast
+                        : movie.aggregate_credits?.cast
+                }
+            ></CastOverview>
         </main>
     );
 };

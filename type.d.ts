@@ -39,12 +39,14 @@ export type TMovie = {
     created_by?: IWritersTV[];
     content_ratings?: TAgeRating;
     release_dates?: TAgeRating;
-    credits?: {
-        cast?: TCast[];
-        crew?: TCrew[];
-    };
+    credits?: TCredits;
+    aggregate_credits?: TCredits;
 };
-type TCast = {
+type TCredits = {
+    cast?: TCast[];
+    crew?: TCrew[];
+};
+export type TCast = {
     adult?: boolean;
     gender?: number | null;
     id?: number;
@@ -57,6 +59,12 @@ type TCast = {
     character?: string;
     credit_id?: string;
     order?: number;
+    roles: {
+        credit_id?: string;
+        character?: string;
+        episode_count?: number;
+    }[];
+    total_episode_count?: number;
 };
 export type TCrew = {
     department?: string;

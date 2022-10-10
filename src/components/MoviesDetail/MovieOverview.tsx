@@ -71,7 +71,7 @@ const MovieOverview = ({ movie }: Props) => {
                     created_by={movie.created_by}
                     crew={movie.credits?.crew}
                 />
-                <p>{`Visit homepage: ${movie.homepage}`}</p>
+                {/* <p>{`Visit homepage: ${movie.homepage}`}</p> */}
             </div>
         </section>
     );
