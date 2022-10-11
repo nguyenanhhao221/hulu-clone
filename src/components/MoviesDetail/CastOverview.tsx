@@ -13,17 +13,17 @@ const CastOverview = ({ cast }: Props) => {
                 Top Billed Cast
             </h2>
             <div className="relative">
-                <ul className=" flex flex-grow snap-x gap-5 overflow-x-auto lg:px-10">
+                <ul className=" flex flex-grow snap-x gap-5 overflow-x-auto overscroll-x-contain lg:px-10">
                     {topCast.map((topCastMember) => (
                         <li
-                            className="flex w-36 snap-center flex-col gap-4 rounded-lg shadow-2xl"
+                            className="flex w-36 snap-center flex-col gap-4 rounded-lg shadow-2xl last:mr-10"
                             key={topCastMember.id}
                         >
                             {<CastCard topCastMember={topCastMember} />}
                         </li>
                     ))}
                 </ul>
-                <div className="absolute  top-0 bottom-0 right-0 w-1/12 bg-gradient-to-l from-hulu-gradient-to "></div>
+                <div className="absolute top-0 bottom-0 right-0 w-1/12 bg-gradient-to-l from-hulu-gradient-to "></div>
             </div>
         </section>
     ) : (
