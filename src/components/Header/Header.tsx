@@ -13,9 +13,13 @@ const Header = () => {
     return (
         <header className="flex h-auto flex-col justify-between p-4 sm:flex-row sm:items-center 2xl:justify-around">
             <div className="flex max-w-2xl flex-grow justify-evenly">
-                <HeaderItem url={'/'} title="HOME" Icon={HomeIcon}></HeaderItem>
                 <HeaderItem
-                    url={'/genres/top-rated'}
+                    url={'/genres/movie/popular'}
+                    title="HOME"
+                    Icon={HomeIcon}
+                ></HeaderItem>
+                <HeaderItem
+                    url={'/genres/movie/top-rated'}
                     title="TOP RATED"
                     Icon={BoltIcon}
                 ></HeaderItem>

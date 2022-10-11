@@ -9,6 +9,7 @@ module.exports = {
                 'hulu-gradient-from': '#040405',
                 'hulu-gradient-to': '#183949',
                 'hulu-black': '#040405',
+                'hulu-secondary': '#29A869',
             },
             screens: {
                 '3xl': '2000px',

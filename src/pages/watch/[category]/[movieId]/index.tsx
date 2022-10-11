@@ -59,7 +59,18 @@ export const getServerSideProps: GetServerSideProps<
                 : false;
             return {
                 props: {
-                    movie: response,
+                    movie: {
+                        ...response,
+                        seasons: response.seasons?.reverse(),
+                        aggregate_credits: {
+                            cast:
+                                response?.aggregate_credits?.cast?.slice(
+                                    0,
+                                    9
+                                ) || [],
+                            crew: [],
+                        },
+                    },
                     backdropImagesProps: backdropImageProps
                         ? {
                               blurDataURL: backdropImageProps.base64,
