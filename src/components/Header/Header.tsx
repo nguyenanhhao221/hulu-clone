@@ -12,7 +12,7 @@ import HuLuLogo from '../../../public/Hulu-Green-digital.png';
 const Header = () => {
     return (
         <header className="flex h-auto flex-col justify-between p-4 sm:flex-row sm:items-center 2xl:justify-around">
-            <div className="flex max-w-2xl flex-grow justify-evenly">
+            <div className="flex max-w-2xl flex-grow justify-evenly whitespace-nowrap">
                 <HeaderItem
                     url={'/genres/movie/popular'}
                     title="HOME"
