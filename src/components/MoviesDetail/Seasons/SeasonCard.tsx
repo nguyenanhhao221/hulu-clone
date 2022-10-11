@@ -8,9 +8,10 @@ type Props = {
     season?: TSeason;
     index: number;
     showName?: string;
+    hideCard?: boolean;
 };
 
-export const SeasonCard = ({ season, index, showName }: Props) => {
+export const SeasonCard = ({ season, index, showName, hideCard }: Props) => {
     if (!season) return <></>;
     const {
         name,
@@ -22,9 +23,9 @@ export const SeasonCard = ({ season, index, showName }: Props) => {
     } = season;
     return (
         <div
-            className={`${
-                index > 5 ? 'hidden' : ''
-            } group flex w-full flex-col-reverse items-center gap-2 overflow-hidden rounded-xl border border-hulu-main border-opacity-50 shadow-2xl md:flex-row-reverse md:justify-between lg:w-[90%] lg:justify-end `}
+            className={`group flex w-full flex-col-reverse items-center gap-2 overflow-hidden rounded-xl border border-hulu-main border-opacity-50 shadow-2xl md:flex-row-reverse md:justify-between lg:w-[90%] lg:justify-end ${
+                index > 0 && hideCard ? `hidden` : `block`
+            }`}
         >
             <div className="px-2 md:basis-2/3">
                 <h4 className="text-lg font-bold tracking-wide">
