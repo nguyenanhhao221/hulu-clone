@@ -7,16 +7,24 @@ import EmptyIMG from '../../../../public/no-image-icon-23483.jpg';
 type Props = {
     season?: TSeason;
     index: number;
+    showName?: string;
 };
 
-export const SeasonCard = ({ season, index }: Props) => {
+export const SeasonCard = ({ season, index, showName }: Props) => {
     if (!season) return <></>;
-    const { name, air_date, episode_count, overview, poster_path } = season;
+    const {
+        name,
+        air_date,
+        episode_count,
+        overview,
+        poster_path,
+        season_number,
+    } = season;
     return (
         <div
             className={`${
                 index > 5 ? 'hidden' : ''
-            } group flex w-full flex-col-reverse items-center gap-2 overflow-hidden rounded-xl border border-hulu-main border-opacity-50 shadow-2xl md:flex-row md:justify-between lg:max-w-[80%]`}
+            } group flex w-full flex-col-reverse items-center gap-2 overflow-hidden rounded-xl border border-hulu-main border-opacity-50 shadow-2xl md:flex-row-reverse md:justify-between lg:w-[90%] lg:justify-end `}
         >
             <div className="px-2 md:basis-2/3">
                 <h4 className="text-lg font-bold tracking-wide">
@@ -38,17 +46,20 @@ export const SeasonCard = ({ season, index }: Props) => {
                         </p>
                     </li>
                 </ol>
-                <p className="py-4 text-sm lg:text-base">{overview}</p>
+                <p className="py-4 text-sm lg:text-base">
+                    {overview ||
+                        `Season ${season_number} of ${showName} premiered on ${air_date}`}
+                </p>
             </div>
-            <div className="w-full overflow-hidden md:w-fit">
+            <div className="w-full overflow-hidden md:w-fit lg:h-1/3 lg:w-[20%]">
                 <Image
-                    className="h-full w-full rounded-xl object-cover object-center"
+                    className="h-full w-full rounded-xl object-cover object-center lg:h-1/3"
                     src={
                         poster_path
                             ? `${BASE_IMAGE_URL}${poster_path}`
                             : EmptyIMG
                     }
-                    width={300}
+                    width={200}
                     height={200}
                     placeholder={!poster_path ? `blur` : `empty`}
                     alt={`${name && name} Poster`}

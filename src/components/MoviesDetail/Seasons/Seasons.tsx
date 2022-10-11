@@ -3,8 +3,9 @@ import { TMovie } from '../../../../type';
 import { SeasonCard } from './SeasonCard';
 type Props = {
     seasons: TMovie['seasons'];
+    showName?: string;
 };
-export const Seasons = ({ seasons }: Props) => {
+export const Seasons = ({ seasons, showName }: Props) => {
     if (seasons && seasons?.length > 0) {
         return (
             <section className="px-4 lg:px-10">
@@ -13,6 +14,7 @@ export const Seasons = ({ seasons }: Props) => {
                     {seasons?.map((season, index) => (
                         <SeasonCard
                             key={season.id}
+                            showName={showName}
                             season={season}
                             index={index}
                         ></SeasonCard>
