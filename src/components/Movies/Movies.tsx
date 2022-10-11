@@ -14,8 +14,6 @@ const Movies = ({ movies }: Props) => {
     const [currentTab, setCurrentTab] = useState(category);
     const [loading, setLoading] = useState<boolean>(false);
     router.events?.on('routeChangeStart', () => {
-        console.log();
-
         setLoading(true);
     });
     router.events?.on('routeChangeComplete', () => {

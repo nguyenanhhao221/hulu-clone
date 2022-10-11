@@ -3,9 +3,14 @@ import PlayTrailer from '../Utils/PlayTrailer';
 import { TMovie } from '../../../type';
 import RunTime from './RunTime';
 import Writers from './Writers';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type Props = { movie: TMovie };
 const MovieOverview = ({ movie }: Props) => {
+    const router = useRouter();
+    const { category } = router.query;
+
     //Get the ageRating base on TV or Movie.
     const { release_dates, content_ratings } = movie;
     let ageRating: string | undefined = 'Unknown';
@@ -17,11 +22,15 @@ const MovieOverview = ({ movie }: Props) => {
     if (content_ratings) {
         ageRating = content_ratings.results?.at(0)?.rating;
     }
+
     return (
         <section className="Movie Detail z-20 place-self-start self-center py-4 lg:w-3/4">
             <div className="space-y-4 px-4">
                 <h2 className="text-center text-2xl font-bold lg:text-left">
-                    {movie.original_title || movie.original_name}{' '}
+                    {movie.name ||
+                        movie.title ||
+                        movie.original_title ||
+                        movie.original_name}{' '}
                     <time className=" text-sm font-light text-gray-300">{`(${
                         movie.release_date?.substring(0, 4) ||
                         movie.first_air_date?.substring(0, 4)
@@ -44,17 +53,28 @@ const MovieOverview = ({ movie }: Props) => {
                         {!content_ratings && !release_dates ? (
                             ``
                         ) : (
-                            <p className="text-grey-300 whitespace-nowrap border px-1 opacity-60">
+                            <p
+                                className={`${
+                                    !ageRating && 'hidden'
+                                } text-grey-300 whitespace-nowrap border px-1 opacity-60`}
+                            >
                                 {ageRating}
                             </p>
                         )}
                         <ul className="flex flex-wrap items-center justify-center text-center md:flex-row lg:w-full lg:justify-start">
                             {movie.genres?.map((genre, index, genreArr) => (
                                 //Add "," to each element except the last
-                                <li className="px-1" key={genre.id}>
-                                    {index === genreArr.length - 1
-                                        ? `${genre.name}`
-                                        : `${genre.name}, `}
+                                <li
+                                    className="cursor-pointer px-1 hover:underline"
+                                    key={genre.id}
+                                >
+                                    <Link
+                                        href={`/genres/${category}/${genre.id}`}
+                                    >
+                                        {index === genreArr.length - 1
+                                            ? `${genre.name}`
+                                            : `${genre.name}, `}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
