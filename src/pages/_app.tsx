@@ -79,12 +79,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="canonical" href="https://projects.haonguyen.tech/" />
-                <meta name="msapplication-TileColor" content="##06202A" />
+                <meta name="msapplication-TileColor" content="#183949" />
                 <meta
                     name="msapplication-TileImage"
                     content="/ms-icon-144x144.png"
                 />
-                <meta name="theme-color" content="#06202A" />
+                <meta name="theme-color" content="#183949" />
                 <meta name="title" content="Hulu Clone 2.0" />
                 <meta
                     name="keywords"
