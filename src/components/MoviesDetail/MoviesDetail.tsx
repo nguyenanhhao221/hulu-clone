@@ -37,10 +37,7 @@ const MoviesDetail = ({
                         : movie.aggregate_credits?.cast
                 }
             ></CastOverview>
-            <Seasons
-                seasons={movie.seasons?.reverse()}
-                showName={movie?.name}
-            />
+            <Seasons seasons={movie?.seasons} showName={movie?.name} />
         </main>
     );
 };

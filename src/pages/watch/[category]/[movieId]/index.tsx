@@ -61,6 +61,7 @@ export const getServerSideProps: GetServerSideProps<
                 props: {
                     movie: {
                         ...response,
+                        seasons: response.seasons?.reverse(),
                         aggregate_credits: {
                             cast:
                                 response?.aggregate_credits?.cast?.slice(
