@@ -3,6 +3,7 @@ import React from 'react';
 import { TCast } from '../../../type';
 
 import { BASE_IMAGE_URL } from '../../utilities/helpers';
+import EmptyIMG from '../../../public/no-image-icon-23483.jpg';
 type Props = { topCastMember: TCast };
 
 const CastCard = ({ topCastMember }: Props) => {
@@ -10,7 +11,10 @@ const CastCard = ({ topCastMember }: Props) => {
         <>
             <div className="relative w-36 overflow-hidden rounded-lg">
                 <Image
-                    src={`${BASE_IMAGE_URL}${topCastMember.profile_path}`}
+                    src={
+                        `${BASE_IMAGE_URL}${topCastMember.profile_path}` ||
+                        EmptyIMG
+                    }
                     alt={`${topCastMember.name}`}
                     height={135}
                     width={120}
