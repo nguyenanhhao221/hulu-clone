@@ -4,16 +4,12 @@ import CastCard from './CastCard';
 type Props = {
     cast?: TCast[];
 };
-const CastOverview = ({ cast }: Props) => {
-    const topCast = cast?.slice(0, 9);
-    return topCast ? (
+const CastOverview = ({ cast: topCast }: Props) => {
+    return topCast && topCast.length > 0 ? (
         <section className="casts p-4">
-            <h2 className="py-2 text-xl font-bold lg:px-10">
-                {' '}
-                Top Billed Cast
-            </h2>
+            <h2 className="section-title lg:px-10"> Top Billed Cast</h2>
             <div className="relative">
-                <ul className=" flex flex-grow snap-x gap-5 overflow-x-auto overscroll-x-contain lg:px-10">
+                <ul className="flex flex-grow snap-x gap-5 overflow-x-auto overscroll-x-contain scrollbar-hide lg:px-10">
                     {topCast.map((topCastMember) => (
                         <li
                             className="flex w-36 snap-center flex-col gap-4 rounded-lg shadow-2xl last:mr-10"

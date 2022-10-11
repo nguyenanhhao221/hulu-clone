@@ -20,4 +20,7 @@
     .tab-lifted.tab-active::before {
         background-image: none;
     }
+    .section-title {
+        @apply py-2 text-xl font-bold;
+    }
 }
