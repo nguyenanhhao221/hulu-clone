@@ -20,7 +20,7 @@ const CastCard = ({ topCastMember }: Props) => {
             <div className="px-2 text-sm">
                 <p className="font-bold">{topCastMember.name}</p>
                 <p className="text-sm">{topCastMember.character}</p>
-                <p>
+                <p className="line-clamp-6">
                     {topCastMember?.roles
                         ?.map((role) => role.character)
                         .join(', ')}
