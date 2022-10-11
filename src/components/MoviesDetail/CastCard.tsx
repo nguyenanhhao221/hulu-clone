@@ -17,6 +17,7 @@ const CastCard = ({ topCastMember }: Props) => {
                     }
                     alt={`${topCastMember.name}`}
                     height={135}
+                    sizes={'20vw'}
                     width={120}
                     className="h-full w-full object-cover "
                 />

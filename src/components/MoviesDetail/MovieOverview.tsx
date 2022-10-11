@@ -29,7 +29,7 @@ const MovieOverview = ({ movie }: Props) => {
     return (
         <section className="Movie Detail z-20 place-self-start self-center py-4 lg:w-3/4">
             <div className="space-y-4 px-4">
-                <h2 className="text-center text-3xl font-bold lg:text-left">
+                <h1 className="text-center text-3xl font-bold lg:text-left">
                     {movie.name ||
                         movie.title ||
                         movie.original_title ||
@@ -38,7 +38,7 @@ const MovieOverview = ({ movie }: Props) => {
                         movie.release_date?.substring(0, 4) ||
                         movie.first_air_date?.substring(0, 4)
                     })`}</time>
-                </h2>
+                </h1>
                 <div className="flex flex-row justify-around lg:justify-start lg:gap-10">
                     <UserScore vote_average={movie.vote_average} />
                     <div className="w-[1px] bg-green-900"></div>
@@ -85,9 +85,7 @@ const MovieOverview = ({ movie }: Props) => {
                 </div>
                 <div className="description">
                     <p className="italic text-gray-400">{movie.tagline}</p>
-                    <h3 className="text-lg font-semibold leading-10">
-                        Overview
-                    </h3>
+                    <h2 className="section-title leading-10">Overview</h2>
                     <p className="font-light tracking-wide">{movie.overview}</p>
                 </div>
                 <Writers

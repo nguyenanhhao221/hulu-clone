@@ -3,6 +3,7 @@ import BackdropPoster from './BackdropPoster';
 import MovieOverview from './MovieOverview';
 import CastOverview from './CastOverview';
 import { useRouter } from 'next/router';
+import { Seasons } from './Seasons/Seasons';
 
 type Props = {
     movie: TMovie;
@@ -36,6 +37,7 @@ const MoviesDetail = ({
                         : movie.aggregate_credits?.cast
                 }
             ></CastOverview>
+            <Seasons seasons={movie.seasons?.reverse()} />
         </main>
     );
 };
