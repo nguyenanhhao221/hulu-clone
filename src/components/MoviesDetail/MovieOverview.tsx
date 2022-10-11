@@ -20,18 +20,21 @@ const MovieOverview = ({ movie }: Props) => {
             ?.release_dates?.at(0)?.certification;
     }
     if (content_ratings) {
-        ageRating = content_ratings.results?.at(0)?.rating;
+        ageRating =
+            content_ratings.results?.find(
+                (rating) => rating.iso_3166_1?.toLowerCase() === 'us'
+            )?.rating || content_ratings.results?.at(0)?.rating;
     }
 
     return (
         <section className="Movie Detail z-20 place-self-start self-center py-4 lg:w-3/4">
             <div className="space-y-4 px-4">
-                <h2 className="text-center text-2xl font-bold lg:text-left">
+                <h2 className="text-center text-3xl font-bold lg:text-left">
                     {movie.name ||
                         movie.title ||
                         movie.original_title ||
                         movie.original_name}{' '}
-                    <time className=" text-sm font-light text-gray-300">{`(${
+                    <time className=" text-sm font-light text-gray-300 lg:text-lg">{`(${
                         movie.release_date?.substring(0, 4) ||
                         movie.first_air_date?.substring(0, 4)
                     })`}</time>
