@@ -36,7 +36,7 @@ const Header = () => {
             </div>
             <div className="self-center sm:self-start">
                 <Image
-                    className="object-contain object-center"
+                    className="h-auto w-auto object-contain object-center"
                     src={HuLuLogo}
                     width={150}
                     height={100}
