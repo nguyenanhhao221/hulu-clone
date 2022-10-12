@@ -9,10 +9,12 @@ const CastOverview = ({ cast: topCast }: Props) => {
         <section className="casts p-4">
             <h2 className="section-title lg:px-10"> Top Billed Cast</h2>
             <div className="relative">
-                <ul className="flex flex-grow snap-x gap-5 overflow-x-auto overscroll-x-contain scrollbar-hide lg:px-10">
+                <ul className="flex flex-grow snap-x gap-5 overflow-x-auto overscroll-x-contain scrollbar-hide lg:px-10 ">
                     {topCast.map((topCastMember) => (
                         <li
-                            className="flex w-36 snap-center flex-col gap-4 rounded-lg shadow-2xl last:mr-10"
+                            className={`flex w-36 snap-center flex-col gap-4 rounded-lg shadow-2xl last:mr-10 ${
+                                !topCastMember.profile_path && `justify-between`
+                            }`}
                             key={topCastMember.id}
                         >
                             {<CastCard topCastMember={topCastMember} />}

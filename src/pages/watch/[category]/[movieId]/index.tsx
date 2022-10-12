@@ -61,7 +61,8 @@ export const getServerSideProps: GetServerSideProps<
                 props: {
                     movie: {
                         ...response,
-                        seasons: response.seasons?.reverse(),
+
+                        seasons: response.seasons?.reverse() || [],
                         aggregate_credits: {
                             cast:
                                 response?.aggregate_credits?.cast?.slice(
@@ -69,6 +70,17 @@ export const getServerSideProps: GetServerSideProps<
                                     9
                                 ) || [],
                             crew: [],
+                        },
+                        credits: {
+                            cast: response?.credits?.cast?.slice(0, 9) || [],
+                        },
+                        videos: response.videos?.results && {
+                            ...response.videos,
+                            results: response.videos?.results.filter(
+                                ({ type, site }) =>
+                                    type?.toLowerCase() === 'trailer' &&
+                                    site?.toLowerCase() === 'youtube'
+                            ),
                         },
                     },
                     backdropImagesProps: backdropImageProps

@@ -9,17 +9,24 @@ type Props = { topCastMember: TCast };
 const CastCard = ({ topCastMember }: Props) => {
     return (
         <>
-            <div className="relative w-36 overflow-hidden rounded-lg">
+            <div
+                className={`${!topCastMember.profile_path && ``}
+                        relative w-36 overflow-hidden
+                    rounded-lg ${
+                        topCastMember.profile_path ? `` : `basis-3/5`
+                    }`}
+            >
                 <Image
                     src={
-                        `${BASE_IMAGE_URL}${topCastMember.profile_path}` ||
-                        EmptyIMG
+                        topCastMember.profile_path
+                            ? `${BASE_IMAGE_URL}${topCastMember.profile_path}`
+                            : EmptyIMG
                     }
+                    className={`h-full w-full object-cover `}
                     alt={`${topCastMember.name}`}
                     height={135}
-                    sizes={'20vw'}
+                    sizes={'15vw'}
                     width={120}
-                    className="h-full w-full object-cover "
                 />
             </div>
             <div className="px-2 text-sm">
