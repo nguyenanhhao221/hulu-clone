@@ -11,13 +11,13 @@ const Trailers = ({ videos, setShowTrailer, showTrailer }: Props) => {
     return (
         <>
             <div
-                className={`fixed inset-0 z-10 flex items-center justify-center px-4 backdrop-blur-sm lg:px-20`}
+                className={`fixed inset-0 z-10 flex items-center justify-center px-4 backdrop-blur-sm backdrop-grayscale lg:px-20`}
             >
-                <div className="flex aspect-video w-full flex-col items-center">
+                <div className="flex aspect-video w-full flex-col items-center bg-hulu-black pb-2">
                     <button
                         type="button"
                         title="Close trailer pop up"
-                        className="place-self-end"
+                        className="place-self-end p-2"
                         onClick={() => setShowTrailer(false)}
                     >
                         <svg
