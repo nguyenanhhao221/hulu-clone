@@ -1,12 +1,21 @@
-const PlayTrailer = () => {
-    return (
-        //TODO implement play trailer popup
-        <button type="button" className="group flex items-center gap-2">
+import React from 'react';
+type Props = {
+    showTrailer: boolean;
+    setShowTrailer: React.Dispatch<React.SetStateAction<boolean>>;
+    haveTrailers: boolean;
+};
+const PlayTrailer = ({ showTrailer, setShowTrailer, haveTrailers }: Props) => {
+    return haveTrailers ? (
+        <button
+            onClick={() => setShowTrailer(!showTrailer)}
+            type="button"
+            className="group flex items-center gap-2"
+        >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="h-6 w-6 group-hover:fill-hulu-green motion-safe:group-hover:animate-pulse"
+                className="h-6 w-6 group-hover:fill-hulu-green motion-safe:group-hover:animate-pulse motion-safe:group-active:animate-ping"
             >
                 <path
                     fillRule="evenodd"
@@ -16,6 +25,8 @@ const PlayTrailer = () => {
             </svg>
             <span className="group-hover:text-hulu-green ">Play trailer</span>
         </button>
+    ) : (
+        <></>
     );
 };
 export default PlayTrailer;

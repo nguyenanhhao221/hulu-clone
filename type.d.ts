@@ -42,6 +42,22 @@ export type TMovie = {
     credits?: TCredits;
     aggregate_credits?: TCredits;
     seasons?: TSeason[];
+    videos?: {
+        id?: number;
+        results: TVideosResult[];
+    };
+};
+type TVideosResult = {
+    iso_639_1?: string;
+    iso_3166_1?: string;
+    name?: string;
+    key?: string;
+    site?: string;
+    size?: number;
+    type?: string;
+    official?: boolean;
+    published_at?: string;
+    id?: string;
 };
 type TSeason = {
     air_date?: string;

@@ -1,9 +1,12 @@
+import React from 'react';
 import type { TImageProps, TMovie } from '../../../type';
 import BackdropPoster from './BackdropPoster';
 import MovieOverview from './MovieOverview';
 import CastOverview from './CastOverview';
 import { useRouter } from 'next/router';
 import { Seasons } from './Seasons/Seasons';
+import { Trailers } from './Trailers/Trailers';
+import { useState } from 'react';
 
 type Props = {
     movie: TMovie;
@@ -17,7 +20,8 @@ const MoviesDetail = ({
 }: Props) => {
     const router = useRouter();
     const { category } = router.query;
-
+    //State for open the Trailer popup
+    const [showTrailer, setShowTrailer] = useState<boolean>(false);
     return (
         <main>
             <BackdropPoster
@@ -25,9 +29,15 @@ const MoviesDetail = ({
                 backdropImagesProps={backdropImagesProps}
                 posterImagesProps={posterImagesProps}
                 movie={movie}
+                showTrailer={showTrailer}
+                setShowTrailer={setShowTrailer}
             />
             <div className="lg:hidden">
-                <MovieOverview movie={movie} />
+                <MovieOverview
+                    showTrailer={showTrailer}
+                    setShowTrailer={setShowTrailer}
+                    movie={movie}
+                />
             </div>
 
             <CastOverview
@@ -38,6 +48,11 @@ const MoviesDetail = ({
                 }
             ></CastOverview>
             <Seasons seasons={movie?.seasons} showName={movie?.name} />
+            <Trailers
+                showTrailer={showTrailer}
+                setShowTrailer={setShowTrailer}
+                videos={movie.videos}
+            />
         </main>
     );
 };

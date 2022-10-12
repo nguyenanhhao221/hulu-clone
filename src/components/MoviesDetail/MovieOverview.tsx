@@ -6,8 +6,12 @@ import Writers from './Writers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-type Props = { movie: TMovie };
-const MovieOverview = ({ movie }: Props) => {
+type Props = {
+    movie: TMovie;
+    showTrailer: boolean;
+    setShowTrailer: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const MovieOverview = ({ movie, showTrailer, setShowTrailer }: Props) => {
     const router = useRouter();
     const { category } = router.query;
 
@@ -42,7 +46,16 @@ const MovieOverview = ({ movie }: Props) => {
                 <div className="flex flex-row justify-around lg:justify-start lg:gap-10">
                     <UserScore vote_average={movie.vote_average} />
                     <div className="w-[1px] bg-green-900"></div>
-                    <PlayTrailer />
+                    <PlayTrailer
+                        showTrailer={showTrailer}
+                        setShowTrailer={setShowTrailer}
+                        haveTrailers={
+                            movie.videos?.results &&
+                            movie.videos.results.length > 0
+                                ? true
+                                : false
+                        }
+                    />
                 </div>
                 <div className="flex flex-col items-center gap-4 space-y-4 py-4 lg:w-2/3 lg:items-start ">
                     <RunTime

@@ -8,12 +8,16 @@ type Props = {
     backdropImagesProps: TImageProps;
     posterImagesProps: TImageProps;
     movie: TMovie;
+    showTrailer: boolean;
+    setShowTrailer: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function BackdropPoster({
     original_title,
     backdropImagesProps,
     posterImagesProps,
     movie,
+    showTrailer,
+    setShowTrailer,
 }: Props) {
     return (
         <div className="relative w-full overflow-hidden">
@@ -67,7 +71,11 @@ function BackdropPoster({
                 </div>
                 {/* Overview for when not in mobile view */}
                 <div className="hidden lg:block">
-                    <MovieOverview movie={movie}></MovieOverview>
+                    <MovieOverview
+                        showTrailer={showTrailer}
+                        setShowTrailer={setShowTrailer}
+                        movie={movie}
+                    ></MovieOverview>
                 </div>
             </div>
         </div>
