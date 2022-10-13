@@ -9,8 +9,16 @@ import {
     UserIcon,
 } from '@heroicons/react/24/outline';
 import HuLuLogo from '../../../public/Hulu-Green-digital.png';
-import Link from 'next/link';
+import React from 'react';
+import { useRouter } from 'next/router';
 const Header = () => {
+    const router = useRouter();
+    const { category, genreId } = router.query;
+    const handleClick = () => {
+        if (category === 'movie' && genreId === 'popular') return;
+        return router.push('/');
+    };
+
     return (
         <header className="flex h-auto flex-col justify-between p-4 sm:flex-row sm:items-center 2xl:justify-around">
             <div className="flex max-w-2xl flex-grow justify-evenly whitespace-nowrap">
@@ -36,16 +44,15 @@ const Header = () => {
                 <HeaderItem title="USER" Icon={UserIcon}></HeaderItem>
             </div>
             <div className="cursor-pointer self-center sm:self-start">
-                <Link href={'/'}>
-                    <Image
-                        className="h-auto w-auto object-contain object-center"
-                        src={HuLuLogo}
-                        width={150}
-                        height={100}
-                        placeholder="blur"
-                        alt="Hulu Logo"
-                    ></Image>
-                </Link>
+                <Image
+                    className="h-auto w-auto object-contain object-center"
+                    src={HuLuLogo}
+                    width={150}
+                    height={100}
+                    placeholder="blur"
+                    alt="Hulu Logo"
+                    onClick={() => handleClick()}
+                ></Image>
             </div>
         </header>
     );
