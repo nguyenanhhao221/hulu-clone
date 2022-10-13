@@ -98,7 +98,7 @@ const MovieOverview = ({ movie, showTrailer, setShowTrailer }: Props) => {
                 </div>
                 <div className="description">
                     <p className="italic text-gray-400">{movie.tagline}</p>
-                    <h2 className="section-title leading-10">Overview</h2>
+                    <h2 className="section-title">Overview</h2>
                     <p className="font-light tracking-wide">{movie.overview}</p>
                 </div>
                 <Writers

@@ -11,7 +11,7 @@ const MovieCard = ({ movie, index }: Props) => {
     const { category } = useRouter().query;
     return (
         <Link href={`/watch/${category}/${movie.id}`}>
-            <div className="group flex max-w-md cursor-pointer flex-col gap-2 overflow-hidden transition-all duration-300 ease-in-out motion-safe:hover:scale-105">
+            <div className="group flex max-w-md cursor-pointer flex-col gap-2 overflow-hidden transition-all duration-300 ease-in-out motion-safe:hover:scale-105 motion-safe:focus:scale-105">
                 <div
                     className={`relative overflow-hidden object-center ${
                         !movie.backdrop_path

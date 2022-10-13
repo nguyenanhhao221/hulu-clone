@@ -13,7 +13,7 @@ const CastCard = ({ topCastMember }: Props) => {
                 className={`${!topCastMember.profile_path && ``}
                         relative w-36 overflow-hidden
                     rounded-lg ${
-                        topCastMember.profile_path ? `` : `basis-3/5`
+                        topCastMember.profile_path ? `` : `basis-[216px]`
                     }`}
             >
                 <Image
@@ -22,7 +22,7 @@ const CastCard = ({ topCastMember }: Props) => {
                             ? `${BASE_IMAGE_URL}${topCastMember.profile_path}`
                             : EmptyIMG
                     }
-                    className={`h-full w-full object-cover `}
+                    className={`h-full w-full object-contain`}
                     alt={`${topCastMember.name}`}
                     height={135}
                     sizes={'15vw'}
