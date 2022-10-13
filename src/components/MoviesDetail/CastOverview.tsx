@@ -14,7 +14,7 @@ const CastOverview = ({ cast: topCast }: Props) => {
             <div className="group relative">
                 <ul
                     ref={listRef}
-                    className="flex flex-grow snap-x gap-5 overflow-x-scroll overscroll-x-contain scroll-smooth scrollbar-hide"
+                    className="flex flex-grow snap-x gap-5 overflow-x-scroll overscroll-x-contain scroll-smooth pb-10 scrollbar-hide"
                 >
                     {topCast.map((topCastMember) => (
                         <li
