@@ -2,8 +2,16 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Header from '../components/Header/Header';
+import React, { createContext, useState } from 'react';
 
+export const LoadContext = createContext({
+    loadingContext: false,
+    setLoadingContext: (prevState: boolean) => {
+        !prevState;
+    },
+});
 function MyApp({ Component, pageProps }: AppProps) {
+    const [loadingContext, setLoadingContext] = useState(false);
     return (
         <>
             <Head>
@@ -111,7 +119,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="apple-mobile-web-app-capable" content="yes" />
             </Head>
             <Header />
-            <Component {...pageProps} />
+            <LoadContext.Provider value={{ loadingContext, setLoadingContext }}>
+                <Component {...pageProps} />
+            </LoadContext.Provider>
         </>
     );
 }

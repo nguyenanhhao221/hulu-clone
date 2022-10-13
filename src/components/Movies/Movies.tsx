@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TMovie } from '../../../type';
+import { LoadContext } from '../../pages/_app';
 import NoContent from '../ErrorDisplay/NoContent';
 import Loader from '../Utils/Loader';
 import TabList from '../Utils/TabList';
@@ -10,14 +11,14 @@ type Props = {
 };
 const Movies = ({ movies }: Props) => {
     const router = useRouter();
+    const { loadingContext, setLoadingContext } = useContext(LoadContext);
     const { category } = router.query;
     const [currentTab, setCurrentTab] = useState(category);
-    const [loading, setLoading] = useState<boolean>(false);
     router.events?.on('routeChangeStart', () => {
-        setLoading(true);
+        setLoadingContext(true);
     });
     router.events?.on('routeChangeComplete', () => {
-        setLoading(false);
+        setLoadingContext(false);
     });
     router.events?.on('routeChangeError', () => {
         return <div>Fail to load</div>;
@@ -30,7 +31,7 @@ const Movies = ({ movies }: Props) => {
     return (
         <>
             <TabList currentTab={currentTab} setCurrentTab={setCurrentTab} />
-            {loading ? (
+            {loadingContext ? (
                 <Loader />
             ) : (
                 <div>

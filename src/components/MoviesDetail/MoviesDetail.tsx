@@ -6,7 +6,9 @@ import CastOverview from './CastOverview';
 import { useRouter } from 'next/router';
 import { Seasons } from './Seasons/Seasons';
 import { Trailers } from './Trailers/Trailers';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import Loader from '../Utils/Loader';
+import { LoadContext } from '../../pages/_app';
 
 type Props = {
     movie: TMovie;
@@ -20,8 +22,21 @@ const MoviesDetail = ({
 }: Props) => {
     const router = useRouter();
     const { category } = router.query;
-    //State for open the Trailer popup
     const [showTrailer, setShowTrailer] = useState<boolean>(false);
+    //Context for loading state when route changes
+    const { loadingContext, setLoadingContext } = useContext(LoadContext);
+    //State for open the Trailer popup
+    router.events?.on('routeChangeStart', () => {
+        setLoadingContext(true);
+    });
+    router.events?.on('routeChangeComplete', () => {
+        setLoadingContext(false);
+    });
+    router.events?.on('routeChangeError', () => {
+        return <div>Fail to load</div>;
+    });
+
+    if (loadingContext) return <Loader />;
     return (
         <main>
             <BackdropPoster
