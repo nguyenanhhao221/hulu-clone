@@ -9,6 +9,7 @@ import {
     UserIcon,
 } from '@heroicons/react/24/outline';
 import HuLuLogo from '../../../public/Hulu-Green-digital.png';
+import Link from 'next/link';
 const Header = () => {
     return (
         <header className="flex h-auto flex-col justify-between p-4 sm:flex-row sm:items-center 2xl:justify-around">
@@ -34,15 +35,17 @@ const Header = () => {
                 ></HeaderItem>
                 <HeaderItem title="USER" Icon={UserIcon}></HeaderItem>
             </div>
-            <div className="self-center sm:self-start">
-                <Image
-                    className="h-auto w-auto object-contain object-center"
-                    src={HuLuLogo}
-                    width={150}
-                    height={100}
-                    placeholder="blur"
-                    alt="Hulu Logo"
-                ></Image>
+            <div className="cursor-pointer self-center sm:self-start">
+                <Link href={'/'}>
+                    <Image
+                        className="h-auto w-auto object-contain object-center"
+                        src={HuLuLogo}
+                        width={150}
+                        height={100}
+                        placeholder="blur"
+                        alt="Hulu Logo"
+                    ></Image>
+                </Link>
             </div>
         </header>
     );
