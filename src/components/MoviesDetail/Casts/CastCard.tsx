@@ -3,7 +3,7 @@ import React from 'react';
 import { TCast } from '../../../../type';
 
 import { BASE_IMAGE_URL } from '../../../utilities/helpers';
-import EmptyIMG from '../../../public/no-image-icon-23483.jpg';
+import EmptyIMG from '../../../../public/no-image-icon-23483.jpg';
 type Props = { topCastMember: TCast };
 
 const CastCard = ({ topCastMember }: Props) => {

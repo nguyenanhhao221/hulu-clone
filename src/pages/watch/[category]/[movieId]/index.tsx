@@ -1,6 +1,6 @@
 import { NextPage, GetServerSideProps, GetServerSidePropsResult } from 'next';
 import { getPlaiceholder } from 'plaiceholder';
-import MoviesDetail from '../../../../components/MoviesDetail/MoviesDetail';
+import MoviesDetail from '../../../../components/MoviesDetail/MoviesOverview/MoviesDetail';
 import type {
     TCategory,
     TFetchDetailParams,

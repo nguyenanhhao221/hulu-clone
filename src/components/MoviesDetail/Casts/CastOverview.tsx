@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { TCast } from '../../../type';
-import { ScrollButtons } from '../Utils/ScrollButtons';
+import { TCast } from '../../../../type';
+import { ScrollButtons } from '../../Utils/ScrollButtons';
 import CastCard from './CastCard';
 
 type Props = {
