@@ -1,6 +1,6 @@
-type Props = { vote_average?: number };
-const UserScore = ({ vote_average }: Props) => {
-    if (!vote_average) return <span>User score is not available</span>;
+type Props = { vote_average?: number; showText: boolean };
+const UserScore = ({ vote_average, showText }: Props) => {
+    if (!vote_average) return <></>;
     const roundedVote = (vote_average * 10).toFixed(0);
     const circleStyle: Record<string, unknown> = {
         '--value': roundedVote,
@@ -23,7 +23,7 @@ const UserScore = ({ vote_average }: Props) => {
                     <sup>%</sup>
                 </span>
             </div>
-            <span>User Score</span>
+            <span className={showText ? '' : `hidden`}>User Score</span>
         </div>
     );
 };

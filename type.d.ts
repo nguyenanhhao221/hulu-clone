@@ -46,6 +46,12 @@ export type TMovie = {
         id?: number;
         results: TVideosResult[];
     };
+    recommendations?: {
+        page?: number;
+        results?: TMovie[];
+        total_pages?: number;
+        total_results?: number;
+    };
 };
 type TVideosResult = {
     iso_639_1?: string;

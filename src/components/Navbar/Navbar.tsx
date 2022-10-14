@@ -26,7 +26,7 @@ const Navbar = ({ genres }: Props) => {
                 {genre?.map(({ name, id }) => (
                     <li
                         key={id}
-                        className={`cursor-pointer  snap-end text-gray-200 transition last:pr-24 hover:scale-125 hover:text-white active:text-hulu-green`}
+                        className={`cursor-pointer  snap-end text-gray-200 transition first:pl-5 last:pr-24 hover:scale-125 hover:text-white active:text-hulu-green`}
                     >
                         <Link href={`/genres/${category}/${id}`} replace>
                             {name}

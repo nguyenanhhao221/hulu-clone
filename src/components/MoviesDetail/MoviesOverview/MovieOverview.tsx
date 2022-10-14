@@ -44,7 +44,10 @@ const MovieOverview = ({ movie, showTrailer, setShowTrailer }: Props) => {
                     })`}</time>
                 </h1>
                 <div className="flex flex-row justify-around lg:justify-start lg:gap-10">
-                    <UserScore vote_average={movie.vote_average} />
+                    <UserScore
+                        vote_average={movie.vote_average}
+                        showText={true}
+                    />
                     <div className="w-[1px] bg-green-900"></div>
                     <PlayTrailer
                         showTrailer={showTrailer}

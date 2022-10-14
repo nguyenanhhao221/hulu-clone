@@ -9,6 +9,7 @@ import { Trailers } from '../Trailers/Trailers';
 import { useState, useContext } from 'react';
 import Loader from '../../Utils/Loader';
 import { LoadContext } from '../../../pages/_app';
+import { Recommendations } from '../Recommendations/Recommendations';
 
 type Props = {
     movie: TMovie;
@@ -68,6 +69,7 @@ const MoviesDetail = ({
                 setShowTrailer={setShowTrailer}
                 videos={movie.videos}
             />
+            <Recommendations recommendations={movie.recommendations} />
         </main>
     );
 };
