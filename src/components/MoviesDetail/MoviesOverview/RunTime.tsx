@@ -1,6 +1,6 @@
 import React from 'react';
-import { EpisodeToAir } from '../../../type';
-import { convertTime } from '../../utilities/helpers';
+import { EpisodeToAir } from '../../../../type';
+import { convertTime } from '../../../utilities/helpers';
 type Props = {
     release_date?: string;
     first_air_date?: string;

@@ -1,8 +1,8 @@
-import UserScore from '../Utils/UserScore';
-import PlayTrailer from '../Utils/PlayTrailer';
-import { TMovie } from '../../../type';
+import UserScore from '../../Utils/UserScore';
+import PlayTrailer from '../../Utils/PlayTrailer';
+import { TMovie } from '../../../../type';
 import RunTime from './RunTime';
-import Writers from './Writers';
+import Writers from '../MoviesOverview/Writers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 

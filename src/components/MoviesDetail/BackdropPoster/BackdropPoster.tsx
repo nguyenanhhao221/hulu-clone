@@ -1,6 +1,6 @@
 import Image from 'next/future/image';
-import { TImageProps, TMovie } from '../../../type';
-import MovieOverview from './MovieOverview';
+import { TImageProps, TMovie } from '../../../../type';
+import MovieOverview from '../MoviesOverview/MovieOverview';
 import EmptyBackdrop from '../../../public/hulu-empty-backdrop.jpg';
 import EmptyPoster from '../../../public/no-image-icon-23483.jpg';
 type Props = {

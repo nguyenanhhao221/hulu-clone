@@ -1,14 +1,14 @@
 import React from 'react';
-import type { TImageProps, TMovie } from '../../../type';
-import BackdropPoster from './BackdropPoster';
+import type { TImageProps, TMovie } from '../../../../type';
+import BackdropPoster from '../BackdropPoster/BackdropPoster';
 import MovieOverview from './MovieOverview';
-import CastOverview from './CastOverview';
+import CastOverview from '../Casts/CastOverview';
 import { useRouter } from 'next/router';
-import { Seasons } from './Seasons/Seasons';
-import { Trailers } from './Trailers/Trailers';
+import { Seasons } from '../Seasons/Seasons';
+import { Trailers } from '../Trailers/Trailers';
 import { useState, useContext } from 'react';
-import Loader from '../Utils/Loader';
-import { LoadContext } from '../../pages/_app';
+import Loader from '../../Utils/Loader';
+import { LoadContext } from '../../../pages/_app';
 
 type Props = {
     movie: TMovie;

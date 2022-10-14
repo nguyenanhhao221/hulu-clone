@@ -1,5 +1,5 @@
 import React from 'react';
-import { TCrew, TMovie } from '../../../type';
+import { TCrew, TMovie } from '../../../../type';
 
 type Props = {
     created_by?: TMovie['created_by'];

@@ -1,8 +1,8 @@
 import Image from 'next/future/image';
 import React from 'react';
-import { TCast } from '../../../type';
+import { TCast } from '../../../../type';
 
-import { BASE_IMAGE_URL } from '../../utilities/helpers';
+import { BASE_IMAGE_URL } from '../../../utilities/helpers';
 import EmptyIMG from '../../../public/no-image-icon-23483.jpg';
 type Props = { topCastMember: TCast };
 
