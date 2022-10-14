@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Overview
 
-## Getting Started
+This is a clone version of Hulu - a streaming movie service. \
+The project was created with NextJS as its core. You can find all the technologies I used in the projects below
 
-First, run the development server:
+A live deploy of this project can be found [here.](https://www.projects.haonguyen.com)
 
-```bash
-pnpm run dev
-#or
-npm run dev
-# or
-yarn dev
+Click [here](#set-up) for quick set up guide on how to run the project.
+
+Summary:
+
+- [Tech Stack](#tech-stack)
+- [Quick Setup](#set-up)
+
+## Tech Stack
+
+---
+
+Build with: \
+
+- ReactJS
+- NextJS
+- Typescript
+- TailwindCSS
+- daisyui
+- react-icons
+- hero-icons
+- axios
+- plaiceholder
+- TMDB Api
+
+## Set up
+
+---
+
+First, you need to have an API key from TMDB in order to access the database\
+Read more about how to get TMDB API key [here.](https://www.themoviedb.org/documentation/api)
+
+Then, create a file in the root folder call `env.local`, and add your API key as follow \
+
+```plain-text
+API_KEY = YOUR_API_KEY
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Second, run the development server:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+pnpm dev
+#or
+npm install
+npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Open <http://localhost:3000> with your browser to see the result.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can start editing the page by modifying pages/index.tsx. The page auto-updates as you edit the file.
