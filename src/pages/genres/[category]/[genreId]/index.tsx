@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps<
                 ),
                 movies,
             },
-            revalidate: 10,
+            revalidate: 30,
         };
     } catch (error) {
         if (error instanceof Error) {

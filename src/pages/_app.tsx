@@ -86,7 +86,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                     href="/favicon-16x16.png"
                 />
                 <link rel="manifest" href="/manifest.json" />
-                <link rel="canonical" href="https://projects.haonguyen.tech/" />
+                <link
+                    rel="canonical"
+                    href="https://projects.haonguyen.tech/en/genres/movie/popular"
+                />
                 <meta name="msapplication-TileColor" content="#183949" />
                 <meta
                     name="msapplication-TileImage"
