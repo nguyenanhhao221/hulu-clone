@@ -28,7 +28,10 @@ const MovieCard = ({ movie, index }: Props) => {
                         height={1080}
                         alt="thumbnail"
                         placeholder={'blur'}
-                        sizes="100vw (min-width 640px) 50vw (min-width 768px) 33vw (min-width 1024px) 25vw "
+                        sizes=" (min-width 1280px) 25vw, 
+                                (min-width 1024px) 33vw,
+                                (min-width 640px) 50vw, 
+                                100vw"
                         priority={index <= 7 ? true : undefined} //We load the first 6 image with priority to give better UX
                     ></Image>
                 </div>
