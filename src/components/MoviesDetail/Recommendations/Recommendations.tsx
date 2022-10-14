@@ -6,6 +6,8 @@ type Props = {
 };
 
 export const Recommendations = ({ recommendations }: Props) => {
+    if (recommendations?.results && recommendations.results?.length <= 0)
+        return <></>;
     return (
         <section className="p-4 lg:px-10">
             <h2 className="section-title">Recommendation Shows</h2>
