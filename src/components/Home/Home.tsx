@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { TCategory, TGenre, TMovie } from '../../../type';
 import CategoryContextProvider from '../CategoryContextProvider/CategoryContextProvider';
-import { Footer } from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import Navbar from '../Navbar/Navbar';
 import Title from '../Title/Title';
@@ -20,7 +19,6 @@ function Home({ genres, movies }: Props) {
             <Navbar genres={genres}></Navbar>
             <Title genres={genres}></Title>
             <Movies movies={movies}></Movies>
-            <Footer />
         </CategoryContextProvider.Provider>
     );
 }

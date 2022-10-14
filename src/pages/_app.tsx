@@ -126,7 +126,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <LoadContext.Provider value={{ loadingContext, setLoadingContext }}>
                 <Component {...pageProps} />
             </LoadContext.Provider>
-            {/* <Footer /> */}
+            <Footer />
         </>
     );
 }
