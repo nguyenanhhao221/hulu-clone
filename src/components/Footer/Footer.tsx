@@ -24,7 +24,7 @@ export const Footer = () => {
                             src={HuluLogo}
                             alt="Hulu logo"
                             placeholder="blur"
-                            className="h-auto w-auto object-contain object-center "
+                            className="h-auto w-auto object-contain object-center"
                         />
                     </Link>
                 </div>
@@ -95,6 +95,7 @@ export const Footer = () => {
                                 src={TMDBLogo}
                                 alt="TMDB Logo"
                                 className="h-auto w-full"
+                                placeholder="blur"
                             ></Image>
                         </a>
                     </Link>
