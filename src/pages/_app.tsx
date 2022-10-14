@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Header from '../components/Header/Header';
 import React, { createContext, useState } from 'react';
+import { Footer } from '../components/Footer/Footer';
 
 export const LoadContext = createContext({
     loadingContext: false,
@@ -125,6 +126,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <LoadContext.Provider value={{ loadingContext, setLoadingContext }}>
                 <Component {...pageProps} />
             </LoadContext.Provider>
+            {/* <Footer /> */}
         </>
     );
 }
