@@ -29,7 +29,7 @@ export const Footer = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col items-center md:col-start-3">
-                    <p className="bg-blue-200 bg-gradient-to-r from-indigo-400 to-cyan-300 bg-clip-text text-center text-sm text-transparent lg:text-xl">
+                    <p className="bg-blue-200 bg-gradient-to-r from-rose-500 to-violet-500 bg-clip-text text-center text-sm text-transparent lg:text-xl">
                         Created By Hao Nguyen
                     </p>
                     <ul className="flex">
@@ -95,7 +95,6 @@ export const Footer = () => {
                                 src={TMDBLogo}
                                 alt="TMDB Logo"
                                 className="h-auto w-full"
-                                placeholder="blur"
                             ></Image>
                         </a>
                     </Link>
