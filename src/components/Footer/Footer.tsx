@@ -19,13 +19,15 @@ export const Footer = () => {
         <footer className="border-t border-gray-300 border-opacity-20 px-4 py-4">
             <div className="mx-auto grid w-full max-w-[80%] grid-cols-1 justify-items-center gap-3 md:grid-cols-3 md:place-items-center ">
                 <div className="h-auto w-[50%] cursor-pointer md:row-span-2 lg:w-[30%]">
-                    <Link href={'/'} title="Go To Homepage">
-                        <Image
-                            src={HuluLogo}
-                            alt="Hulu logo"
-                            placeholder="blur"
-                            className="h-auto w-auto object-contain object-center"
-                        />
+                    <Link passHref href={'/'} title="Go To Homepage">
+                        <a>
+                            <Image
+                                src={HuluLogo}
+                                alt="Hulu logo"
+                                placeholder="blur"
+                                className="h-auto w-auto object-contain object-center"
+                            />
+                        </a>
                     </Link>
                 </div>
                 <div className="flex flex-col items-center md:col-start-3">
@@ -70,6 +72,7 @@ export const Footer = () => {
                                 <Link
                                     href="https://twitter.com/nguyenanhhao221"
                                     passHref
+                                    prefetch={false}
                                 >
                                     <a
                                         target="_blank"
