@@ -5,7 +5,7 @@ type Props = {
     searchFormOpen: boolean;
     setSearchFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export const SearchForm = ({ searchFormOpen, setSearchFormOpen }: Props) => {
+export const SearchForm = ({ searchFormOpen }: Props) => {
     const router = useRouter();
     const [input, setInput] = useState<string>('');
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
