@@ -4,15 +4,39 @@ import Head from 'next/head';
 import Header from '../components/Header/Header';
 import React, { createContext, useState } from 'react';
 import { Footer } from '../components/Footer/Footer';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import {
+    DehydratedState,
+    Hydrate,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
 export const LoadContext = createContext({
     loadingContext: false,
     setLoadingContext: (prevState: boolean) => {
         !prevState;
     },
 });
-function MyApp({ Component, pageProps }: AppProps) {
+//Extends the AppProps
+// https://github.com/TanStack/query/discussions/2872
+function MyApp({
+    Component,
+    pageProps,
+}: AppProps<{ dehydratedState: DehydratedState }>) {
     const [loadingContext, setLoadingContext] = useState(false);
+    //Set up the QueryClient instance for each request to the server.
+    //Stale data for 5s
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        //TODO double check if we need to keep this as 5000ms
+                        staleTime: 5000,
+                    },
+                },
+            })
+    );
     return (
         <>
             <Head>
@@ -123,10 +147,17 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="apple-mobile-web-app-capable" content="yes" />
             </Head>
             <Header />
-            <LoadContext.Provider value={{ loadingContext, setLoadingContext }}>
-                <Component {...pageProps} />
-            </LoadContext.Provider>
-            <Footer />
+            <QueryClientProvider client={queryClient}>
+                <Hydrate state={pageProps.dehydratedState}>
+                    <ReactQueryDevtools />
+                    <LoadContext.Provider
+                        value={{ loadingContext, setLoadingContext }}
+                    >
+                        <Component {...pageProps} />
+                    </LoadContext.Provider>
+                    <Footer />
+                </Hydrate>
+            </QueryClientProvider>
         </>
     );
 }

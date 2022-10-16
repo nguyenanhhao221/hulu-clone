@@ -36,7 +36,7 @@ export const SearchCard = ({ movie }: Props) => {
                     width={100}
                     height={200}
                 ></Image>
-                <div className="flex flex-col justify-between py-2">
+                <div className="flex flex-col justify-between p-2">
                     <div className="">
                         <h3 className="font-bold">
                             {title || original_title || name || original_name}

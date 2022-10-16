@@ -11,6 +11,7 @@ import {
 import HuLuLogo from '../../../public/Hulu-Green-digital.png';
 import React from 'react';
 import { useRouter } from 'next/router';
+import { SearchForm } from '../SearchForm/SearchForm';
 const Header = () => {
     const router = useRouter();
     const { category, genreId } = router.query;
@@ -53,6 +54,9 @@ const Header = () => {
                     alt="Hulu Logo"
                     onClick={() => handleClick()}
                 ></Image>
+            </div>
+            <div>
+                <SearchForm />
             </div>
         </header>
     );

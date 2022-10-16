@@ -52,6 +52,7 @@ export type TMovie = {
         total_pages?: number;
         total_results?: number;
     };
+    media_type?: 'tv' | 'movie';
 };
 type TVideosResult = {
     iso_639_1?: string;
@@ -170,3 +171,39 @@ export type TFetchDetailParams = {
     id: string;
     category: 'movie' | 'tv';
 };
+
+//Result type when call /search/api from TMDb
+export interface ISearchResults {
+    page?: number;
+    results?: ISearchMovies[] | ISearchTVShows[];
+    total_results?: number;
+    total_pages?: number;
+}
+type TMediaType = 'movie' | 'tv';
+interface ISearchMovies {
+    poster_path?: string | null;
+    adult?: boolean;
+    overview?: string;
+    release_date?: string;
+    original_title?: string;
+    genre_ids?: number[];
+    id?: number;
+    media_type: TMediaType;
+    original_language?: string;
+    title?: string;
+    backdrop_path?: string | null;
+    popularity?: number;
+    vote_count?: number;
+    video?: boolean;
+    vote_average?: number;
+    name?: string;
+    first_air_date?: string;
+}
+
+interface ISearchTVShows extends ISearchMovies {
+    media_type: 'tv';
+    first_air_date?: string;
+    origin_country?: string[];
+    original_name?: string;
+    name?: string;
+}

@@ -15,7 +15,7 @@ export const Recommendations = ({ recommendations }: Props) => {
                 {recommendations?.results?.map((recommendation) => (
                     <RecommendationCard
                         key={recommendation.id}
-                        recommendation={recommendation}
+                        movie={recommendation}
                     />
                 ))}
             </div>

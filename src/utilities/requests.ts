@@ -15,7 +15,7 @@ const baseOptions: AxiosRequestConfig = {
         language: 'en_US',
     },
 };
-const axiosTMDB = axios.create(baseOptions);
+export const axiosTMDB = axios.create(baseOptions);
 
 //Get Popular movies and Tv show
 export const fetchPopular = async (apiKey: string, categories: TCategory[]) => {

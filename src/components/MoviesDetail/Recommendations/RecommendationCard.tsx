@@ -8,10 +8,10 @@ import { useRouter } from 'next/router';
 import RunTime from '../MoviesOverview/RunTime';
 import UserScore from '../../Utils/UserScore';
 type Props = {
-    recommendation: TMovie;
+    movie: TMovie;
 };
 
-export const RecommendationCard = ({ recommendation }: Props) => {
+export const RecommendationCard = ({ movie }: Props) => {
     const router = useRouter();
     const { category } = router.query;
     const {
@@ -23,10 +23,10 @@ export const RecommendationCard = ({ recommendation }: Props) => {
         release_date,
         first_air_date,
         vote_average,
-    } = recommendation;
+    } = movie;
     return (
         <Link className="cursor-pointer" href={`/watch/${category}/${id}`}>
-            <div className="flex flex-col gap-4 rounded-lg pb-4  shadow-xl ring-1 ring-hulu-secondary ring-opacity-30 transition-transform hover:border-opacity-100 hover:ring-opacity-100 focus:ring-1 focus:ring-opacity-100 motion-safe:hover:scale-105">
+            <div className="motion-safe:md::hover:scale-105 flex flex-col gap-4 rounded-lg  pb-4 shadow-xl ring-1 ring-hulu-secondary ring-opacity-30 transition-transform hover:border-opacity-100 hover:ring-opacity-100 focus:ring-1 focus:ring-opacity-100">
                 <div>
                     <Image
                         src={

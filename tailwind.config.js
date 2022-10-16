@@ -27,5 +27,6 @@ module.exports = {
         require('daisyui'),
         require('@tailwindcss/line-clamp'),
         require('prettier-plugin-tailwindcss'),
+        require('@tailwindcss/forms'),
     ],
 };
