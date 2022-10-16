@@ -37,7 +37,9 @@ const Movies = ({ movies }: Props) => {
                 <div>
                     {' '}
                     <main>
-                        {cardToRender?.length === 0 && <NoContent />}
+                        {cardToRender?.length === 0 && (
+                            <NoContent noGenresResult />
+                        )}
                         <div className="grid flex-wrap justify-center gap-6 overflow-hidden p-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:flex">
                             {cardToRender?.map((movie, index) => (
                                 <MovieCard

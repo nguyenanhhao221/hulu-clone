@@ -10,10 +10,12 @@ import Link from 'next/link';
 import { CodeBracketIcon } from '@heroicons/react/24/outline';
 import { CTAButtons } from '../Utils/CTAButtons';
 import TMDBLogo from '../../../public/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg';
+import { Url } from 'url';
 export const Footer = () => {
     const CTAButtonsProps = {
         btnTitle: 'source code',
         Icon: CodeBracketIcon,
+        href: 'https://github.com/nguyenanhhao221/hulu-clone' as unknown as Url,
     };
     return (
         <footer className="border-t border-gray-300 border-opacity-20 px-4 py-4">

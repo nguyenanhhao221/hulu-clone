@@ -1,17 +1,30 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TDataResponseTMDB } from '../../../type';
 import { SearchTabs } from '../SearchTabs/SearchTabs';
 import { SearchCard } from './SearchCard';
-
+import NoContent from '../ErrorDisplay/NoContent';
+import { useRouter } from 'next/router';
+import { LoadContext } from '../../pages/_app';
+import Loader from '../Utils/Loader';
 const SearchDisplay = () => {
+    const router = useRouter();
+    const { loadingContext, setLoadingContext } = useContext(LoadContext);
+    router.events?.on('routeChangeStart', () => {
+        setLoadingContext(true);
+    });
+    router.events?.on('routeChangeComplete', () => {
+        setLoadingContext(false);
+    });
+    router.events?.on('routeChangeError', () => {
+        return <div>Fail to load</div>;
+    });
     const { data }: UseQueryResult<TDataResponseTMDB> =
         useQuery<TDataResponseTMDB>(['searchMovies']);
-    //TODO handle when data is empty
     const [currentFilter, setCurrentFilter] = useState<'tv' | 'movie'>('movie');
 
-    if (!data) {
-        return <></>;
+    if (!data || data.results.length <= 0) {
+        return <NoContent noSearchResult />;
     }
 
     const filteredData = data?.results.filter(
@@ -53,13 +66,17 @@ const SearchDisplay = () => {
                 totalTVShows={totalTVShows}
                 tabButtons={tabButtons}
             />
-            <div className="mx-auto grid w-full grid-cols-1 place-items-center items-stretch gap-4 py-4">
-                {filteredData
-                    .filter((movie) => movie.media_type === currentFilter)
-                    .map((movie) => (
-                        <SearchCard movie={movie} key={movie.id} />
-                    ))}
-            </div>
+            {loadingContext ? (
+                <Loader />
+            ) : (
+                <div className="mx-auto grid w-full grid-cols-1 place-items-center items-stretch gap-4 py-4">
+                    {filteredData
+                        .filter((movie) => movie.media_type === currentFilter)
+                        .map((movie) => (
+                            <SearchCard movie={movie} key={movie.id} />
+                        ))}
+                </div>
+            )}
         </div>
     );
 };
