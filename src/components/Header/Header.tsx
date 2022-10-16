@@ -7,21 +7,44 @@ import {
     RectangleStackIcon,
     BoltIcon,
     UserIcon,
+    XMarkIcon,
 } from '@heroicons/react/24/outline';
 import HuLuLogo from '../../../public/Hulu-Green-digital.png';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { SearchForm } from '../SearchForm/SearchForm';
 const Header = () => {
     const router = useRouter();
+    const [searchFormOpen, setSearchFormOpen] = useState<boolean>(false);
     const { category, genreId } = router.query;
     const handleClick = () => {
         if (category === 'movie' && genreId === 'popular') return;
         return router.push('/');
     };
-
+    if (searchFormOpen)
+        return (
+            <header className="sticky top-0 bg-gradient-to-r from-hulu-gradient-from to-hulu-gradient-to py-4">
+                <div className="flex cursor-pointer items-center  justify-end hover:text-white">
+                    <button
+                        type="button"
+                        title="Close"
+                        onClick={() => setSearchFormOpen(false)}
+                        className="group flex flex-col items-center justify-center"
+                    >
+                        <XMarkIcon className="mb-1 h-8 group-hover:animate-bounce" />
+                        <p className="invisible tracking-widest group-hover:visible">
+                            CLOSE
+                        </p>
+                    </button>
+                </div>
+                <SearchForm
+                    searchFormOpen={searchFormOpen}
+                    setSearchFormOpen={setSearchFormOpen}
+                />
+            </header>
+        );
     return (
-        <header className="flex h-auto flex-col justify-between p-4 sm:flex-row sm:items-center 2xl:justify-around">
+        <header className="flex h-auto flex-col justify-between p-4 transition-all sm:flex-row sm:items-center 2xl:justify-around">
             <div className="flex max-w-2xl flex-grow justify-evenly whitespace-nowrap">
                 <HeaderItem
                     url={'/genres/movie/popular'}
@@ -37,6 +60,8 @@ const Header = () => {
                 <HeaderItem
                     title="SEARCH"
                     Icon={MagnifyingGlassIcon}
+                    setSearchFormOpen={setSearchFormOpen}
+                    searchFormOpen={searchFormOpen}
                 ></HeaderItem>
                 <HeaderItem
                     title="COLLECTION"
@@ -54,9 +79,6 @@ const Header = () => {
                     alt="Hulu Logo"
                     onClick={() => handleClick()}
                 ></Image>
-            </div>
-            <div>
-                <SearchForm />
             </div>
         </header>
     );
