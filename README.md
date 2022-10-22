@@ -3,7 +3,7 @@
 This is a clone version of Hulu - a streaming movie service. \
 The project was created with NextJS as its core. You can find all the technologies I used in the projects below
 
-A live deploy of this project can be found [here.](https://www.projects.haonguyen.tech)
+A live deploy of this project can be found [here.](https://projects.haonguyen.tech)
 
 Click [here](#set-up) for quick set up guide on how to run the project.
 
