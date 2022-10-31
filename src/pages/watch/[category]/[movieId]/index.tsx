@@ -57,6 +57,10 @@ export const getServerSideProps: GetServerSideProps<
             const posterImageProps = poster_path
                 ? await getPlaiceholder(`${BASE_IMAGE_URL}${poster_path}`)
                 : false;
+            context.res.setHeader(
+                'Cache-Control',
+                'public, s-maxage=3600, stale-while-revalidate=3000'
+            );
             return {
                 props: {
                     movie: {
