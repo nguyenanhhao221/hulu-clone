@@ -126,7 +126,8 @@ export const getStaticProps: GetStaticProps<
                 ),
                 movies,
             },
-            revalidate: 86400,
+            //https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration
+            revalidate: 60 * 60 * 24 * 7, // revalidate once every week
         };
     } catch (error) {
         if (error instanceof Error) {
